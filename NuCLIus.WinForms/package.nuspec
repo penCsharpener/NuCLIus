@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NuCLIus.WinForms</id>
+    <version>0.1.0</version>
+    <title>NuCLIus</title>
+    <authors>Matthias Müller (penCsharpener)</authors>
+    <owners>Matthias Müller (penCsharpener)</owners>
+    <projectUrl>https://github.com/penCsharpener/NuCLIus</projectUrl>
+<!--
+    <licenseUrl></licenseUrl>
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>-</description>
+    <!--*-->
+    <releaseNotes>-</releaseNotes>
+    <copyright>penCsharpener @  2019</copyright>
+    <tags>nuget</tags>
+    <dependencies>
+      <!--
+      <dependency id="SampleDependency" version="1.0" />
+-->
+    </dependencies>
+  </metadata>
+</package>
