@@ -19,9 +19,12 @@ namespace NuCLIus.WinForms.Preferences {
         }
 
         private void DialogLoad(object sender, EventArgs e) {
-            _toolTips.InitialDelay = 1;
-            _toolTips.ReshowDelay = 1;
+            _toolTips.InitialDelay = 100;
+            _toolTips.ReshowDelay = 100;
+            _toolTips.ShowAlways = true;
+            _toolTips.IsBalloon = true;
             _toolTips.SetToolTip(txtNugetpath, Properties.Resources.pref_nuget_exe_path);
+            _toolTips.SetToolTip(txtDefaultOutputPath, Properties.Resources.pref_nuget_default_output_path);
         }
     }
 }

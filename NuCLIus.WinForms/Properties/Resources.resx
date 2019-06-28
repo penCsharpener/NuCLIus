@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="pref_nuget_default_output_path" xml:space="preserve">
+    <value>The location where all created .nupkg files should be created at. If blank it defaults to {path of .csproj/.nuspec}\bin\Nuget</value>
+  </data>
   <data name="pref_nuget_exe_path" xml:space="preserve">
     <value>The path to your nuget.exe file. If blank it is assumed that an environment variable for it exists or it is at C:\Windows\system32</value>
   </data>

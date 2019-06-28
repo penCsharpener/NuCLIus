@@ -61,6 +61,15 @@ namespace NuCLIus.WinForms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The location where all created .nupkg files should be created at. If blank it defaults to {path of .csproj/.nuspec}\bin\Nuget.
+        /// </summary>
+        internal static string pref_nuget_default_output_path {
+            get {
+                return ResourceManager.GetString("pref_nuget_default_output_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The path to your nuget.exe file. If blank it is assumed that an environment variable for it exists or it is at C:\Windows\system32.
         /// </summary>
         internal static string pref_nuget_exe_path {
