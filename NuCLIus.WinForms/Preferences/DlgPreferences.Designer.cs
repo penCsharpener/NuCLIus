@@ -23,11 +23,15 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.txtNugetpath = new System.Windows.Forms.TextBox();
+            this.btnGetNugetPath = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +73,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnGetNugetPath);
+            this.tabPage3.Controls.Add(this.txtNugetpath);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Location = new System.Drawing.Point(4, 36);
             this.tabPage3.Name = "tabPage3";
@@ -81,11 +87,32 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 36);
+            this.label1.Location = new System.Drawing.Point(28, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(88, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "nuget.exe path:";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // txtNugetpath
+            // 
+            this.txtNugetpath.Location = new System.Drawing.Point(122, 29);
+            this.txtNugetpath.Name = "txtNugetpath";
+            this.txtNugetpath.Size = new System.Drawing.Size(314, 23);
+            this.txtNugetpath.TabIndex = 1;
+            // 
+            // btnGetNugetPath
+            // 
+            this.btnGetNugetPath.Location = new System.Drawing.Point(442, 28);
+            this.btnGetNugetPath.Name = "btnGetNugetPath";
+            this.btnGetNugetPath.Size = new System.Drawing.Size(28, 23);
+            this.btnGetNugetPath.TabIndex = 2;
+            this.btnGetNugetPath.Text = "...";
+            this.btnGetNugetPath.UseVisualStyleBackColor = true;
             // 
             // DlgPreferences
             // 
@@ -111,5 +138,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnGetNugetPath;
+        private System.Windows.Forms.TextBox txtNugetpath;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

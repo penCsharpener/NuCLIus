@@ -59,5 +59,14 @@ namespace NuCLIus.WinForms.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path to your nuget.exe file. If blank it is assumed that an environment variable for it exists or it is at C:\Windows\system32.
+        /// </summary>
+        internal static string pref_nuget_exe_path {
+            get {
+                return ResourceManager.GetString("pref_nuget_exe_path", resourceCulture);
+            }
+        }
     }
 }

@@ -4,11 +4,15 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>NuCLIus.WinForms</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\NuCLIus.WinForms\*.cs"/>
-    <Compile Include="..\NuCLIus.WinForms\Pre*\*.cs"/>
+    <Compile Include="..\NuCLIus.WinForms\**\*.cs" />
+    <EmbeddedResource Include="..\NuCLIus.WinForms\**\*.resx" />
+    <!--<Compile Include="..\NuCLIus.WinForms\Pre*\*.cs"/>
+    <Compile Include="..\NuCLIus.WinForms\Prop*\*.resx"/>-->
   </ItemGroup>
 
   <ItemGroup>

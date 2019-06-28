@@ -13,6 +13,11 @@ namespace NuCLIus.WinForms {
     public partial class Mainform : Form {
         public Mainform() {
             InitializeComponent();
+            Load += MainformLoad;
+        }
+
+        private void MainformLoad(object sender, EventArgs e) {
+            PreferencesToolStripMenuItem_Click(null, null);
         }
 
         private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
