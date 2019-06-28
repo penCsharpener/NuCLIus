@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.Testing", "NuCLIus.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.Models", "NuCLIus.Models\NuCLIus.Models.csproj", "{6F69C909-9E22-46DC-93A7-590C58229560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCLIus.ShellExt", "NuCLIus.ShellExt\NuCLIus.ShellExt.csproj", "{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.ShellExt", "NuCLIus.ShellExt\NuCLIus.ShellExt.csproj", "{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYaSyncQL.Client.Forms.Controls", "..\MYaSyncQL\src\MYaSyncQL.Client.Forms.Controls\MYaSyncQL.Client.Forms.Controls.csproj", "{CA79B8B6-3ED1-42EC-A37B-F91B003E8833}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-utils", "..\dotnet-utils\dotnet-utils.csproj", "{A170A8FF-45A0-4587-8BC8-596913F8AF58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA79B8B6-3ED1-42EC-A37B-F91B003E8833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA79B8B6-3ED1-42EC-A37B-F91B003E8833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA79B8B6-3ED1-42EC-A37B-F91B003E8833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA79B8B6-3ED1-42EC-A37B-F91B003E8833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
