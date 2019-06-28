@@ -6,4 +6,16 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\NuCLIus.WinForms\*.cs"/>
+    <Compile Include="..\NuCLIus.WinForms\Pre*\*.cs"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj" />
+    <ProjectReference Include="..\..\MYaSyncQL\src\MYaSyncQL.Client.Forms.Controls\MYaSyncQL.Client.Forms.Controls.csproj" />
+    <ProjectReference Include="..\NuCLIus.Core\NuCLIus.Core.csproj" />
+    <ProjectReference Include="..\NuCLIus.Models\NuCLIus.Models.csproj" />
+  </ItemGroup>
+
 </Project>
