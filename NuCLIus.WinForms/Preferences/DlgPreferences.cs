@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NuCLIus.WinForms {
-    public partial class Form1 : Form {
-        public Form1() {
+namespace NuCLIus.WinForms.Preferences {
+    public partial class DlgPreferences : Form {
+        public DlgPreferences() {
             InitializeComponent();
         }
     }

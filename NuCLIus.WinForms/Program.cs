@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NuCLIus.WinForms {
-    static class Program {
+    public static class Program {
+        public static Mainform Mainform { get; private set; }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -13,7 +14,8 @@ namespace NuCLIus.WinForms {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Mainform = new Mainform();
+            Application.Run(Mainform);
         }
     }
 }

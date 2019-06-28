@@ -47,14 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Mainform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Mainform.Designer.cs">
+      <DependentUpon>Mainform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences\DlgPreferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preferences\DlgPreferences.Designer.cs">
+      <DependentUpon>DlgPreferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Mainform.resx">
+      <DependentUpon>Mainform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\DlgPreferences.resx">
+      <DependentUpon>DlgPreferences.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,6 +90,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj">
+      <Project>{a170a8ff-45a0-4587-8bc8-596913f8af58}</Project>
+      <Name>dotnet-utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MYaSyncQL\src\MYaSyncQL.Client.Forms.Controls\MYaSyncQL.Client.Forms.Controls.csproj">
+      <Project>{ca79b8b6-3ed1-42ec-a37b-f91b003e8833}</Project>
+      <Name>MYaSyncQL.Client.Forms.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NuCLIus.Core\NuCLIus.Core.csproj">
+      <Project>{e3ab4897-0298-474f-8e4a-cc94cb7a821b}</Project>
+      <Name>NuCLIus.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NuCLIus.Models\NuCLIus.Models.csproj">
+      <Project>{6f69c909-9e22-46dc-93a7-590c58229560}</Project>
+      <Name>NuCLIus.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
