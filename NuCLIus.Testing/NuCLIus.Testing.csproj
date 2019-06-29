@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj" />
+    <ProjectReference Include="..\NuCLIus.Core\NuCLIus.Core.csproj" />
+    <ProjectReference Include="..\NuCLIus.Services\NuCLIus.Services.csproj" />
+  </ItemGroup>
+
 </Project>

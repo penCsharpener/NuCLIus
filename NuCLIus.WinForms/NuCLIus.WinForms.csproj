@@ -110,9 +110,9 @@
       <Project>{e3ab4897-0298-474f-8e4a-cc94cb7a821b}</Project>
       <Name>NuCLIus.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NuCLIus.Models\NuCLIus.Models.csproj">
+    <ProjectReference Include="..\NuCLIus.Services\NuCLIus.Services.csproj">
       <Project>{6f69c909-9e22-46dc-93a7-590c58229560}</Project>
-      <Name>NuCLIus.Models</Name>
+      <Name>NuCLIus.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
