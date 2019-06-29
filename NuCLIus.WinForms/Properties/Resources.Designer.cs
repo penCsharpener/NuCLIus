@@ -95,5 +95,14 @@ namespace NuCLIus.WinForms.Properties {
                 return ResourceManager.GetString("pref_nuget_local_nuget_server", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A root folder is a folder and  it&apos;s subfolders containing .csproj, .vbproj, .sln, .nupkg, .snupkg files.
+        /// </summary>
+        internal static string pref_nuget_root_folder_path {
+            get {
+                return ResourceManager.GetString("pref_nuget_root_folder_path", resourceCulture);
+            }
+        }
     }
 }

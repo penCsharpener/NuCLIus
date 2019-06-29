@@ -25,6 +25,8 @@
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageApplication = new System.Windows.Forms.TabPage();
+            this.btnAddRootFolder = new System.Windows.Forms.Button();
+            this.btnGetProjectPath = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtRootProjectFolder = new System.Windows.Forms.TextBox();
@@ -48,7 +50,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSqliteDBLocation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -62,10 +64,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txtDefaultOutputPath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNugetpath = new System.Windows.Forms.TextBox();
+            this.txtNugetExePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnGetProjectPath = new System.Windows.Forms.Button();
-            this.btnAddNuget = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageApplication.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProjectFolders)).BeginInit();
@@ -94,7 +94,7 @@
             // 
             // tabPageApplication
             // 
-            this.tabPageApplication.Controls.Add(this.btnAddNuget);
+            this.tabPageApplication.Controls.Add(this.btnAddRootFolder);
             this.tabPageApplication.Controls.Add(this.btnGetProjectPath);
             this.tabPageApplication.Controls.Add(this.label14);
             this.tabPageApplication.Controls.Add(this.label13);
@@ -107,6 +107,24 @@
             this.tabPageApplication.TabIndex = 0;
             this.tabPageApplication.Text = "Application";
             this.tabPageApplication.UseVisualStyleBackColor = true;
+            // 
+            // btnAddRootFolder
+            // 
+            this.btnAddRootFolder.Location = new System.Drawing.Point(556, 56);
+            this.btnAddRootFolder.Name = "btnAddRootFolder";
+            this.btnAddRootFolder.Size = new System.Drawing.Size(45, 23);
+            this.btnAddRootFolder.TabIndex = 4;
+            this.btnAddRootFolder.Text = "Add";
+            this.btnAddRootFolder.UseVisualStyleBackColor = true;
+            // 
+            // btnGetProjectPath
+            // 
+            this.btnGetProjectPath.Location = new System.Drawing.Point(522, 56);
+            this.btnGetProjectPath.Name = "btnGetProjectPath";
+            this.btnGetProjectPath.Size = new System.Drawing.Size(28, 23);
+            this.btnGetProjectPath.TabIndex = 4;
+            this.btnGetProjectPath.Text = "...";
+            this.btnGetProjectPath.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -230,7 +248,7 @@
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.textBox6);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtSqliteDBLocation);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
@@ -345,13 +363,13 @@
             this.label12.TabIndex = 1;
             this.label12.Text = "Folder Location:";
             // 
-            // textBox1
+            // txtSqliteDBLocation
             // 
-            this.textBox1.Location = new System.Drawing.Point(127, 46);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(406, 23);
-            this.textBox1.TabIndex = 2;
+            this.txtSqliteDBLocation.Location = new System.Drawing.Point(127, 46);
+            this.txtSqliteDBLocation.Name = "txtSqliteDBLocation";
+            this.txtSqliteDBLocation.ReadOnly = true;
+            this.txtSqliteDBLocation.Size = new System.Drawing.Size(406, 23);
+            this.txtSqliteDBLocation.TabIndex = 2;
             // 
             // label4
             // 
@@ -402,7 +420,7 @@
             this.tabPageNuget.Controls.Add(this.label15);
             this.tabPageNuget.Controls.Add(this.txtDefaultOutputPath);
             this.tabPageNuget.Controls.Add(this.label2);
-            this.tabPageNuget.Controls.Add(this.txtNugetpath);
+            this.tabPageNuget.Controls.Add(this.txtNugetExePath);
             this.tabPageNuget.Controls.Add(this.label1);
             this.tabPageNuget.Location = new System.Drawing.Point(4, 36);
             this.tabPageNuget.Name = "tabPageNuget";
@@ -480,10 +498,10 @@
             // 
             // txtNugetpath
             // 
-            this.txtNugetpath.Location = new System.Drawing.Point(135, 20);
-            this.txtNugetpath.Name = "txtNugetpath";
-            this.txtNugetpath.Size = new System.Drawing.Size(314, 23);
-            this.txtNugetpath.TabIndex = 1;
+            this.txtNugetExePath.Location = new System.Drawing.Point(135, 20);
+            this.txtNugetExePath.Name = "txtNugetpath";
+            this.txtNugetExePath.Size = new System.Drawing.Size(314, 23);
+            this.txtNugetExePath.TabIndex = 1;
             // 
             // label1
             // 
@@ -493,24 +511,6 @@
             this.label1.Size = new System.Drawing.Size(88, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "nuget.exe path:";
-            // 
-            // btnGetProjectPath
-            // 
-            this.btnGetProjectPath.Location = new System.Drawing.Point(522, 56);
-            this.btnGetProjectPath.Name = "btnGetProjectPath";
-            this.btnGetProjectPath.Size = new System.Drawing.Size(28, 23);
-            this.btnGetProjectPath.TabIndex = 4;
-            this.btnGetProjectPath.Text = "...";
-            this.btnGetProjectPath.UseVisualStyleBackColor = true;
-            // 
-            // btnAddNuget
-            // 
-            this.btnAddNuget.Location = new System.Drawing.Point(556, 56);
-            this.btnAddNuget.Name = "btnAddNuget";
-            this.btnAddNuget.Size = new System.Drawing.Size(45, 23);
-            this.btnAddNuget.TabIndex = 4;
-            this.btnAddNuget.Text = "Add";
-            this.btnAddNuget.UseVisualStyleBackColor = true;
             // 
             // DlgPreferences
             // 
@@ -547,7 +547,7 @@
         private System.Windows.Forms.TabPage tabPageNuget;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGetNugetPath;
-        private System.Windows.Forms.TextBox txtNugetpath;
+        private System.Windows.Forms.TextBox txtNugetExePath;
         private System.Windows.Forms.Button btnGetDefaultOutputPath;
         private System.Windows.Forms.TextBox txtDefaultOutputPath;
         private System.Windows.Forms.Label label2;
@@ -559,7 +559,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSqliteDBLocation;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
@@ -582,7 +582,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtLocalDevNugetServer;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button btnAddNuget;
+        private System.Windows.Forms.Button btnAddRootFolder;
         private System.Windows.Forms.Button btnGetProjectPath;
     }
 }

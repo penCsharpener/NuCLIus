@@ -1,15 +1,13 @@
 ﻿using NuCLIus.Core.Contracts;
-using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NuCLIus.Services {
     public class SqliteStorageService : IStorageService {
 
         public const string DATABASENAME = "nuclius.db";
+        public string SqliteDatabaseLocation { get; private set; }
         private SQLiteConnection db;
 
         public SqliteStorageService() {
@@ -17,20 +15,20 @@ namespace NuCLIus.Services {
         }
 
         public async Task SetupStorageSolution(string appdataPath) {
-            var fullFilePath = Path.Combine(appdataPath, DATABASENAME);
+            SqliteDatabaseLocation = Path.Combine(appdataPath, DATABASENAME);
             // for development purposes: recreate on each debug build to apply 
             // changed table schema
-            if (File.Exists(fullFilePath)) {
+            if (File.Exists(SqliteDatabaseLocation)) {
 #if DEBUG
-                File.Delete(fullFilePath);
+                File.Delete(SqliteDatabaseLocation);
 #endif
             }
-            var dbExisted = File.Exists(fullFilePath);
+            var dbExisted = File.Exists(SqliteDatabaseLocation);
             if (dbExisted == false) {
-                SQLiteConnection.CreateFile(fullFilePath);
+                SQLiteConnection.CreateFile(SqliteDatabaseLocation);
             }
 
-            db = new SQLiteConnection($"Data Source={fullFilePath};Version=3;");
+            db = new SQLiteConnection($"Data Source={SqliteDatabaseLocation};Version=3;");
             if (dbExisted == false) {
                 await Task.Factory.StartNew(async () => {
                     await db.OpenAsync();

@@ -7,10 +7,10 @@ namespace NuCLIus.Services {
     public class PreferenceService : IPreferenceService {
         public string AppDataPath { get; }
 
-        private readonly IStorageService _storage;
+        public IStorageService StorageService { get; }
 
         public PreferenceService(IStorageService storage) {
-            _storage = storage;
+            StorageService = storage;
             AppDataPath = Environment.ExpandEnvironmentVariables("%appdata%\\NuCLIus");
         }
 
@@ -18,7 +18,7 @@ namespace NuCLIus.Services {
             if (Directory.Exists(AppDataPath) == false) {
                 Directory.CreateDirectory(AppDataPath);
             }
-            await _storage.SetupStorageSolution(AppDataPath);
+            await StorageService.SetupStorageSolution(AppDataPath);
         }
     }
 }

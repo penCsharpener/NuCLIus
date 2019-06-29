@@ -12,12 +12,15 @@
   <ItemGroup>
     <Compile Include="..\NuCLIus.WinForms\**\*.cs" />
     <EmbeddedResource Include="..\NuCLIus.WinForms\**\*.resx" />
+    <EmbeddedResource Include="..\NuCLIus.WinForms\**\*.xml" />
+    <EmbeddedResource Include="..\NuCLIus.WinForms\**\*.xsd" />
     <!--<Compile Include="..\NuCLIus.WinForms\Pre*\*.cs"/>
     <Compile Include="..\NuCLIus.WinForms\Prop*\*.resx"/>-->
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,6 +9,14 @@ namespace NuCLIus.WinForms.Config {
             _preference = preference;
         }
 
+        public IPreferenceService GetPreferenceService() {
+            return _preference;
+        }
+
+        public IStorageService GetStorageService() {
+            return _preference.StorageService;
+        }
+
         public object InitForm() {
             return new Mainform(this);
         }

@@ -129,4 +129,7 @@
   <data name="pref_nuget_local_nuget_server" xml:space="preserve">
     <value>Path to local nuget 'server' with hierachical struggle created by 'nuget add &lt;.nupkg&gt; -Source &lt;this Path&gt;' commands. If blank no local nuget server is used.</value>
   </data>
+  <data name="pref_nuget_root_folder_path" xml:space="preserve">
+    <value>A root folder is a folder and  it's subfolders containing .csproj, .vbproj, .sln, .nupkg, .snupkg files</value>
+  </data>
 </root>

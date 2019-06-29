@@ -16,8 +16,8 @@ namespace NuCLIus.WinForms {
 
         public Mainform(IStartup startup) {
             InitializeComponent();
-            Load += MainformLoad;
             _startup = startup;
+            Load += MainformLoad;
         }
 
         private async void MainformLoad(object sender, EventArgs e) {
@@ -26,7 +26,7 @@ namespace NuCLIus.WinForms {
         }
 
         private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
-            new DlgPreferences().Show();
+            new DlgPreferences(_startup.GetPreferenceService()).Show();
         }
     }
 }
