@@ -2,20 +2,26 @@
 using NuCLIus.WinForms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace NuCLIus.WinForms.Config {
     public class Startup : IStartup {
-        public Startup() {
 
+        public string AppDataPath { get; set; }
+
+        public Startup() {
+            AppDataPath = Environment.ExpandEnvironmentVariables("%appdata%\\NuCLIus");
         }
 
         public object InitForm() {
-            return new Mainform();
+            return new Mainform(this);
         }
 
         public void SetupAppDataFolder() {
-            Console.WriteLine("Test Autofac");
+            if (Directory.Exists(AppDataPath) == false) {
+                Directory.CreateDirectory(AppDataPath);
+            }
         }
     }
 }

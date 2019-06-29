@@ -1,4 +1,5 @@
-﻿using NuCLIus.WinForms.Preferences;
+﻿using NuCLIus.Core.Contracts;
+using NuCLIus.WinForms.Preferences;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +12,21 @@ using System.Windows.Forms;
 
 namespace NuCLIus.WinForms {
     public partial class Mainform : Form {
-        public Mainform() {
+        private readonly IStartup _startup;
+
+        public Mainform(IStartup startup) {
             InitializeComponent();
             Load += MainformLoad;
+            _startup = startup;
         }
 
         private void MainformLoad(object sender, EventArgs e) {
+            _startup.SetupAppDataFolder();
             PreferencesToolStripMenuItem_Click(null, null);
         }
 
         private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
-            var dlg = new DlgPreferences();
-            dlg.Show();
+            new DlgPreferences().Show();
         }
     }
 }
