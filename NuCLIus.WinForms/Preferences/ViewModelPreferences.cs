@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NuCLIus.Core.Contracts;
@@ -51,6 +50,12 @@ namespace NuCLIus.WinForms.Preferences {
 
         public async Task GetRootFolders() {
             BsRootFolders.DataSource = (await Preference.StorageService.GetRootFolders()).ToList();
+        }
+
+        public async Task SeedPreferences() {
+            FolderPath = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
+            await AddRootFolder();
+            FolderPath = null;
         }
 
         #endregion

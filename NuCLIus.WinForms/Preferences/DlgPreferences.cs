@@ -24,8 +24,11 @@ namespace NuCLIus.WinForms.Preferences {
             Load += DialogLoad;
         }
 
-        private void DialogLoad(object sender, EventArgs e) {
+        private async void DialogLoad(object sender, EventArgs e) {
             InitControls();
+#if !RELEASE
+            await vm.SeedPreferences();
+#endif
         }
 
         private void InitControls() {
