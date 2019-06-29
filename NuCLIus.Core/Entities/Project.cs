@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace NuCLIus.Core.Entities {
@@ -29,6 +30,16 @@ namespace NuCLIus.Core.Entities {
                 return;
             } else {
                 FindGitRepoRecursively(dirInfo.Parent.FullName, --iteration);
+            }
+        }
+
+        public FileInfo GetSolutionInfo() {
+            var di = new DirectoryInfo(new DirectoryInfo(System.IO.Path.GetDirectoryName(Path)).Parent.FullName);
+            var slnFiles = di.GetFiles("*.sln");
+            if (slnFiles.Length == 1) {
+                return slnFiles[0];
+            } else {
+                return null;
             }
         }
     }
