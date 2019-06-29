@@ -1,4 +1,7 @@
-﻿using NuCLIus.Core.Contracts;
+﻿using Dapper.Contrib.Extensions;
+using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using System.Threading.Tasks;
@@ -29,18 +32,26 @@ namespace NuCLIus.Services {
             }
 
             db = new SQLiteConnection($"Data Source={SqliteDatabaseLocation};Version=3;");
+            await db.OpenAsync();
             if (dbExisted == false) {
                 await Task.Factory.StartNew(async () => {
-                    await db.OpenAsync();
                     await new SQLiteCommand(SqliteSchema.GITREPOS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.NUPKGS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.PREFERENCES, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.PROJECTS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.ROOTFOLDERS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.SOLUTIONS, db).ExecuteNonQueryAsync();
-                    db.Close();
                 });
             }
+        }
+
+        public async Task<IEnumerable<RootFolder>> GetRootFolders() {
+            return await db.GetAllAsync<RootFolder>();
+        }
+
+        public async Task SaveRootFolder(RootFolder folder) {
+            var id = await db.InsertAsync(folder);
+            folder.ID = id;
         }
     }
 }

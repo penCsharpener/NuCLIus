@@ -1,4 +1,6 @@
-﻿using NuCLIus.Core.Contracts;
+﻿using MYaSyncQL.Client.Forms.Controls.Wrappers;
+using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,7 @@ namespace NuCLIus.WinForms.Preferences {
     public partial class DlgPreferences : Form {
 
         private ToolTip _toolTips = new ToolTip();
+        private DGVEnhancer<RootFolder> dgvProjectFolders;
         private ViewModelPreferences vm;
 
         public DlgPreferences(IPreferenceService preference) {
@@ -35,6 +38,19 @@ namespace NuCLIus.WinForms.Preferences {
             _toolTips.SetToolTip(txtLocalNugetServer, Properties.Resources.pref_nuget_local_nuget_server);
             _toolTips.SetToolTip(txtLocalDevNugetServer, Properties.Resources.pref_nuget_local_dev_nuget_server);
             _toolTips.SetToolTip(txtRootProjectFolder, Properties.Resources.pref_nuget_root_folder_path);
+            dgvProjectFolders = new DGVEnhancer<RootFolder>(dataProjectFolders);
+            dataProjectFolders.DataSource = vm.BsRootFolders;
+            var buttonColumn = new DataGridViewButtonColumn() {
+                Text = "✘",
+                Name = "RemovePath",
+                HeaderText = "Remove",
+                Visible = true,
+                UseColumnTextForButtonValue = true,
+            };
+            dgvProjectFolders.SetColumnLayout(new[] {
+                new DGVColumnLayout(nameof(RootFolder.Path), "Path", 100, true, false),
+                new DGVColumnLayout(buttonColumn, 70, false, false),
+            });
 
             InitHandlers();
         }
