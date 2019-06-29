@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCLIus.WinForms", "NuCLIus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.Testing", "NuCLIus.Testing\NuCLIus.Testing.csproj", "{A1335E1A-2D0E-4894-AECC-BA15C84A3B3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.Models", "NuCLIus.Models\NuCLIus.Models.csproj", "{6F69C909-9E22-46DC-93A7-590C58229560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.Services", "NuCLIus.Services\NuCLIus.Services.csproj", "{6F69C909-9E22-46DC-93A7-590C58229560}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuCLIus.ShellExt", "NuCLIus.ShellExt\NuCLIus.ShellExt.csproj", "{E29C1AB2-0144-45FC-A662-1B1CF9DD54A6}"
 EndProject
