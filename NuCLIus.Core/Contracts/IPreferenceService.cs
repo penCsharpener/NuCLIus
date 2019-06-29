@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NuCLIus.Core.Contracts {
     public interface IPreferenceService {
-        void CreateAppDataFolder();
+        string AppDataPath { get; }
+
+        Task SetupAppDataFolder();
     }
 }

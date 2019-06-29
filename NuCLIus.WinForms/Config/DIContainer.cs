@@ -11,8 +11,9 @@ namespace NuCLIus.WinForms.Config {
     public static class DIContainer {
         public static IContainer Config() {
             var builder = new ContainerBuilder();
-            builder.RegisterType<Startup>().As<IStartup>();
-            builder.RegisterType<PreferenceService>().As<IPreferenceService>();
+            builder.RegisterType<Startup>().As<IStartup>().SingleInstance();
+            builder.RegisterType<PreferenceService>().As<IPreferenceService>().SingleInstance();
+            builder.RegisterType<SqliteStorageService>().As<IStorageService>().SingleInstance();
             return builder.Build();
         }
     }

@@ -20,8 +20,8 @@ namespace NuCLIus.WinForms {
             _startup = startup;
         }
 
-        private void MainformLoad(object sender, EventArgs e) {
-            _startup.SetupAppDataFolder();
+        private async void MainformLoad(object sender, EventArgs e) {
+            await _startup.SetupAppDataFolder();
             PreferencesToolStripMenuItem_Click(null, null);
         }
 

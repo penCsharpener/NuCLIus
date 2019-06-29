@@ -1,4 +1,5 @@
 ﻿using NuCLIus.Core.Contracts;
+using System.Threading.Tasks;
 
 namespace NuCLIus.WinForms.Config {
     public class Startup : IStartup {
@@ -12,8 +13,8 @@ namespace NuCLIus.WinForms.Config {
             return new Mainform(this);
         }
 
-        public void SetupAppDataFolder() {
-            _preference.CreateAppDataFolder();
+        public async Task SetupAppDataFolder() {
+            await _preference.SetupAppDataFolder();
         }
     }
 }

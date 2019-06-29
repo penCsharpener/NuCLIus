@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.111" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj" />
     <ProjectReference Include="..\NuCLIus.Core\NuCLIus.Core.csproj" />
   </ItemGroup>
