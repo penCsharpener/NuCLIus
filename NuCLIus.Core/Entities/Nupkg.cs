@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 
 namespace NuCLIus.Core.Entities {
-    public class Nupkg {
+    public class Nupkg : IPrimary, IFile {
         public int ID { get; set; }
         public string Path { get; set; }
         public int ProjectID { get; set; }
