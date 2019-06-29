@@ -22,7 +22,7 @@ namespace NuCLIus.WinForms {
 
         private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
             var dlg = new DlgPreferences();
-            dlg.ShowDialog();
+            dlg.Show();
         }
     }
 }
