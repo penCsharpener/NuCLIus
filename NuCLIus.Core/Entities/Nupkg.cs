@@ -2,10 +2,12 @@
 using penCsharpener.DotnetUtils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace NuCLIus.Core.Entities {
+    [DebuggerDisplay("Nupkg '{Path}'")]
     public class Nupkg : IPrimary, IFile {
         public int ID { get; set; }
         public string Path { get; set; }
