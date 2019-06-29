@@ -1,17 +1,11 @@
 ﻿using NuCLIus.Core.Contracts;
-using NuCLIus.WinForms;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace NuCLIus.WinForms.Config {
     public class Startup : IStartup {
+        private readonly IPreferenceService _preference;
 
-        public string AppDataPath { get; set; }
-
-        public Startup() {
-            AppDataPath = Environment.ExpandEnvironmentVariables("%appdata%\\NuCLIus");
+        public Startup(IPreferenceService preference) {
+            _preference = preference;
         }
 
         public object InitForm() {
@@ -19,9 +13,7 @@ namespace NuCLIus.WinForms.Config {
         }
 
         public void SetupAppDataFolder() {
-            if (Directory.Exists(AppDataPath) == false) {
-                Directory.CreateDirectory(AppDataPath);
-            }
+            _preference.CreateAppDataFolder();
         }
     }
 }
