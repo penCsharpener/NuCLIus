@@ -22,7 +22,7 @@ namespace NuCLIus.Services {
             // for development purposes: recreate on each debug build to apply 
             // changed table schema
             if (File.Exists(SqliteDatabaseLocation)) {
-#if DEBUG
+#if !RELEASE
                 File.Delete(SqliteDatabaseLocation);
 #endif
             }
@@ -41,6 +41,9 @@ namespace NuCLIus.Services {
                     await new SQLiteCommand(SqliteSchema.PROJECTS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.ROOTFOLDERS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.SOLUTIONS, db).ExecuteNonQueryAsync();
+
+                    await new SQLiteCommand(SqliteSchema.GITREPO_INDEXES, db).ExecuteNonQueryAsync();
+                    await new SQLiteCommand(SqliteSchema.NUPKG_INDEXES, db).ExecuteNonQueryAsync();
                 });
             }
         }
