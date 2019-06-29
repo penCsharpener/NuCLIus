@@ -77,5 +77,23 @@ namespace NuCLIus.WinForms.Properties {
                 return ResourceManager.GetString("pref_nuget_exe_path", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple local folder for pre-release nuget packages. .nupkgs are just copied there. If blank no dev nuget server is used..
+        /// </summary>
+        internal static string pref_nuget_local_dev_nuget_server {
+            get {
+                return ResourceManager.GetString("pref_nuget_local_dev_nuget_server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path to local nuget &apos;server&apos; with hierachical struggle created by &apos;nuget add &lt;.nupkg&gt; -Source &lt;this Path&gt;&apos; commands. If blank no local nuget server is used..
+        /// </summary>
+        internal static string pref_nuget_local_nuget_server {
+            get {
+                return ResourceManager.GetString("pref_nuget_local_nuget_server", resourceCulture);
+            }
+        }
     }
 }

@@ -123,4 +123,10 @@
   <data name="pref_nuget_exe_path" xml:space="preserve">
     <value>The path to your nuget.exe file. If blank it is assumed that an environment variable for it exists or it is at C:\Windows\system32</value>
   </data>
+  <data name="pref_nuget_local_dev_nuget_server" xml:space="preserve">
+    <value>Simple local folder for pre-release nuget packages. .nupkgs are just copied there. If blank no dev nuget server is used.</value>
+  </data>
+  <data name="pref_nuget_local_nuget_server" xml:space="preserve">
+    <value>Path to local nuget 'server' with hierachical struggle created by 'nuget add &lt;.nupkg&gt; -Source &lt;this Path&gt;' commands. If blank no local nuget server is used.</value>
+  </data>
 </root>

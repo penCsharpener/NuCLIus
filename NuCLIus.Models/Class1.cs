@@ -2,5 +2,6 @@
 
 namespace NuCLIus.Models {
     public class Class1 {
+
     }
 }

@@ -25,6 +25,8 @@ namespace NuCLIus.WinForms.Preferences {
             _toolTips.IsBalloon = true;
             _toolTips.SetToolTip(txtNugetpath, Properties.Resources.pref_nuget_exe_path);
             _toolTips.SetToolTip(txtDefaultOutputPath, Properties.Resources.pref_nuget_default_output_path);
+            _toolTips.SetToolTip(txtLocalNugetServer, Properties.Resources.pref_nuget_local_nuget_server);
+            _toolTips.SetToolTip(txtLocalDevNugetServer, Properties.Resources.pref_nuget_local_dev_nuget_server);
         }
     }
 }
