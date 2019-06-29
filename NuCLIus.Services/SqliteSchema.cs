@@ -4,12 +4,12 @@ using System.Text;
 
 namespace NuCLIus.Services {
     internal static class SqliteSchema {
-        internal const string GITREPOS = @"CREATE TABLE ""gitrepos"" (
+        internal const string GITREPOS = @"CREATE TABLE ""GitRepos"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL
 )";
 
-        internal const string NUPKGS = @"CREATE TABLE ""nupkgs"" (
+        internal const string NUPKGS = @"CREATE TABLE ""Nupkgs"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
 	""ProjectID""	INTEGER,
@@ -18,22 +18,23 @@ namespace NuCLIus.Services {
 	""PackageName""	TEXT NOT NULL,
 	""Version""	TEXT NOT NULL
 )";
-        internal const string PREFERENCES = @"CREATE TABLE ""preferences"" (
+        internal const string PREFERENCES = @"CREATE TABLE ""Preferences"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Name""	TEXT NOT NULL,
 	""Value""	TEXT
 )";
-        internal const string PROJECTS = @"CREATE TABLE ""projects"" (
+        internal const string PROJECTS = @"CREATE TABLE ""Projects"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
 	""PathSha1""	TEXT NOT NULL,
 	""SolutionID""	INTEGER
 )";
-        internal const string ROOTFOLDERS = @"CREATE TABLE ""root_folders"" (
+        internal const string ROOTFOLDERS = @"CREATE TABLE ""RootFolders"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	""Path""	INTEGER NOT NULL
+	""Path""	TEXT NOT NULL,
+	""PathSha1""	TEXT NOT NULL UNIQUE
 )";
-        internal const string SOLUTIONS = @"CREATE TABLE ""solutions"" (
+        internal const string SOLUTIONS = @"CREATE TABLE ""Solutions"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
 	""PathSha1""	TEXT NOT NULL,
