@@ -24,6 +24,7 @@ namespace NuCLIus.WinForms.Preferences {
             await vm.SeedPreferences();
 #endif
             await vm.GetIgnorePaths();
+            await vm.PopulateSettings();
         }
 
         private void InitControls() {
@@ -87,6 +88,9 @@ namespace NuCLIus.WinForms.Preferences {
                     }
                 }
             };
+            btnSaveSettings.Click += async (s, e) => {
+                await vm.SavePreferences();
+            };
             InitBindings();
         }
 
@@ -94,9 +98,14 @@ namespace NuCLIus.WinForms.Preferences {
             txtRootProjectFolder.DataBindings.Add(nameof(txtRootProjectFolder.Text), vm, nameof(vm.FolderPath), true, DataSourceUpdateMode.OnPropertyChanged);
             txtSqliteDBLocation.DataBindings.Add(nameof(txtSqliteDBLocation.Text), vm, nameof(vm.SqliteDBLocation), true, DataSourceUpdateMode.OnPropertyChanged);
             txtNugetExePath.DataBindings.Add(nameof(txtNugetExePath.Text), vm, nameof(vm.NugetExePath), true, DataSourceUpdateMode.OnPropertyChanged);
-            txtDefaultOutputPath.DataBindings.Add(nameof(txtDefaultOutputPath.Text), vm, nameof(vm.DefaultOutputPath), true, DataSourceUpdateMode.OnPropertyChanged);
-            txtLocalNugetServer.DataBindings.Add(nameof(txtLocalNugetServer.Text), vm, nameof(vm.LocalNugetServer), true, DataSourceUpdateMode.OnPropertyChanged);
-            txtLocalDevNugetServer.DataBindings.Add(nameof(txtLocalDevNugetServer.Text), vm, nameof(vm.LocalDevNugetServer), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtDefaultOutputPath.DataBindings.Add(nameof(txtDefaultOutputPath.Text), vm, nameof(vm.NugetDefaultOutputPath), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtLocalNugetServer.DataBindings.Add(nameof(txtLocalNugetServer.Text), vm, nameof(vm.NugetLocalNugetServer), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtLocalDevNugetServer.DataBindings.Add(nameof(txtLocalDevNugetServer.Text), vm, nameof(vm.NugetLocalDevNugetServer), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtServerURL.DataBindings.Add(nameof(txtServerURL.Text), vm, nameof(vm.MySQL_ServerURL), true, DataSourceUpdateMode.OnPropertyChanged);
+            numMySqlPort.DataBindings.Add(nameof(numMySqlPort.Value), vm, nameof(vm.MySQL_Port), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtUsername.DataBindings.Add(nameof(txtUsername.Text), vm, nameof(vm.MySQL_Username), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtDatabase.DataBindings.Add(nameof(txtDatabase.Text), vm, nameof(vm.MySQL_Database), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtPassword.DataBindings.Add(nameof(txtPassword.Text), vm, nameof(vm.MySQL_Password), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

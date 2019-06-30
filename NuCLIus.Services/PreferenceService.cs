@@ -1,5 +1,8 @@
 ﻿using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -19,6 +22,10 @@ namespace NuCLIus.Services {
                 Directory.CreateDirectory(AppDataPath);
             }
             await StorageService.SetupStorageSolution(AppDataPath);
+        }
+
+        public async Task<IEnumerable<Preference>> GetSettings() {
+            return await StorageService.GetAll<Preference>();
         }
     }
 }

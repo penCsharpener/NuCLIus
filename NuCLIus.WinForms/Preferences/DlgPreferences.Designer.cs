@@ -39,14 +39,14 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.numMySqlPort = new System.Windows.Forms.NumericUpDown();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtDatabase = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtServerURL = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -72,6 +72,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.btnGetIgnorePath = new System.Windows.Forms.Button();
             this.btnAddIgnorePath = new System.Windows.Forms.Button();
+            this.btnSaveSettings = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageApplication.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProjectFolders)).BeginInit();
@@ -251,14 +252,14 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.numMySqlPort);
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.txtPassword);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.textBox5);
+            this.panel1.Controls.Add(this.txtUsername);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.txtDatabase);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.txtServerURL);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.textBox6);
             this.panel1.Controls.Add(this.label12);
@@ -286,13 +287,13 @@
             this.numMySqlPort.Size = new System.Drawing.Size(112, 23);
             this.numMySqlPort.TabIndex = 3;
             // 
-            // textBox3
+            // txtPassword
             // 
-            this.textBox3.Location = new System.Drawing.Point(127, 269);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(406, 23);
-            this.textBox3.TabIndex = 2;
-            this.textBox3.UseSystemPasswordChar = true;
+            this.txtPassword.Location = new System.Drawing.Point(127, 269);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(406, 23);
+            this.txtPassword.TabIndex = 2;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label11
             // 
@@ -303,12 +304,12 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "Password:";
             // 
-            // textBox5
+            // txtUsername
             // 
-            this.textBox5.Location = new System.Drawing.Point(127, 240);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(406, 23);
-            this.textBox5.TabIndex = 2;
+            this.txtUsername.Location = new System.Drawing.Point(127, 240);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(406, 23);
+            this.txtUsername.TabIndex = 2;
             // 
             // label10
             // 
@@ -319,12 +320,12 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "Username:";
             // 
-            // textBox4
+            // txtDatabase
             // 
-            this.textBox4.Location = new System.Drawing.Point(127, 211);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(406, 23);
-            this.textBox4.TabIndex = 2;
+            this.txtDatabase.Location = new System.Drawing.Point(127, 211);
+            this.txtDatabase.Name = "txtDatabase";
+            this.txtDatabase.Size = new System.Drawing.Size(406, 23);
+            this.txtDatabase.TabIndex = 2;
             // 
             // label9
             // 
@@ -344,12 +345,12 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Port:";
             // 
-            // textBox2
+            // txtServerURL
             // 
-            this.textBox2.Location = new System.Drawing.Point(127, 153);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(406, 23);
-            this.textBox2.TabIndex = 2;
+            this.txtServerURL.Location = new System.Drawing.Point(127, 153);
+            this.txtServerURL.Name = "txtServerURL";
+            this.txtServerURL.Size = new System.Drawing.Size(406, 23);
+            this.txtServerURL.TabIndex = 2;
             // 
             // label7
             // 
@@ -578,11 +579,21 @@
             this.btnAddIgnorePath.Text = "Add";
             this.btnAddIgnorePath.UseVisualStyleBackColor = true;
             // 
+            // btnSaveSettings
+            // 
+            this.btnSaveSettings.Location = new System.Drawing.Point(807, 8);
+            this.btnSaveSettings.Name = "btnSaveSettings";
+            this.btnSaveSettings.Size = new System.Drawing.Size(118, 23);
+            this.btnSaveSettings.TabIndex = 4;
+            this.btnSaveSettings.Text = "Save Preferences";
+            this.btnSaveSettings.UseVisualStyleBackColor = true;
+            // 
             // DlgPreferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnSaveSettings);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DlgPreferences";
@@ -629,15 +640,15 @@
         private System.Windows.Forms.TextBox txtSqliteDBLocation;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtServerURL;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtDatabase;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numMySqlPort;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label12;
@@ -657,5 +668,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtScanIgnorePaths;
         private System.Windows.Forms.DataGridView dataIgnorePaths;
+        private System.Windows.Forms.Button btnSaveSettings;
     }
 }

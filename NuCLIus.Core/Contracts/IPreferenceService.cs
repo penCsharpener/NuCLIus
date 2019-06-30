@@ -1,6 +1,5 @@
-﻿using System;
+﻿using NuCLIus.Core.Entities;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NuCLIus.Core.Contracts {
@@ -9,5 +8,6 @@ namespace NuCLIus.Core.Contracts {
         IStorageService StorageService { get; }
 
         Task SetupAppDataFolder();
+        Task<IEnumerable<Preference>> GetSettings();
     }
 }

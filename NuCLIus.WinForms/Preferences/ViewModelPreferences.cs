@@ -77,6 +77,61 @@ namespace NuCLIus.WinForms.Preferences {
             BsIgnorePaths.DataSource = (await Storage.GetAll<ScanIgnorePath>()).ToList();
         }
 
+        public async Task PopulateSettings() {
+            var prefs = await Preference.GetSettings();
+            foreach (var pref in prefs) {
+                switch ((Settings)pref.ID) {
+                    case Settings.StorageMode:
+                        break;
+                    case Settings.MySQL_ServerURL:
+                        MySQL_ServerURL = pref.GetString();
+                        break;
+                    case Settings.MySQL_Port:
+                        MySQL_Port = pref.GetInt();
+                        break;
+                    case Settings.MySQL_Database:
+                        MySQL_Database = pref.GetString();
+                        break;
+                    case Settings.MySQL_Username:
+                        MySQL_Username = pref.GetString();
+                        break;
+                    case Settings.MySQL_Password:
+                        MySQL_Password = pref.GetString();
+                        break;
+                    case Settings.StorageFileLocation:
+                        StorageFileLocation = pref.GetString();
+                        break;
+                    case Settings.NugetExePath:
+                        NugetExePath = pref.GetString();
+                        break;
+                    case Settings.NugetDefaultOutputPath:
+                        NugetDefaultOutputPath = pref.GetString();
+                        break;
+                    case Settings.NugetLocalNugetServer:
+                        NugetLocalNugetServer = pref.GetString();
+                        break;
+                    case Settings.NugetLocalDevNugetServer:
+                        NugetLocalDevNugetServer = pref.GetString();
+                        break;
+                }
+            }
+        }
+
+        public async Task SavePreferences() {
+            var propInfos = this.GetType().GetProperties();
+            var storedPrefs = await Storage.GetAll<Core.Entities.Preference>();
+            var common = storedPrefs.Select(x => x.Name).Intersect(propInfos.Select(x => x.Name));
+            foreach (var property in storedPrefs.Where(x => common.Contains(x.Name))) {
+                var propInfo = propInfos.FirstOrDefault(x => x.Name == property.Name);
+                if (property.GetEnumType() == PreferenceTypes.Int) {
+                    property.ValueInt = (int)propInfo.GetValue(this);
+                } else if (property.GetEnumType() == PreferenceTypes.Int) {
+                    property.ValueString = (string)propInfo.GetValue(this);
+                }
+                await Storage.UpdateEntity(property);
+            }
+        }
+
         public async Task SeedPreferences() {
             FolderPath = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
             if (!(await Storage.GetAll<RootFolder>()).Any(x => x.PathSha1 == FolderPath.ToSha1())) {
@@ -102,15 +157,22 @@ namespace NuCLIus.WinForms.Preferences {
         #region Storage Tab
 
         public string SqliteDBLocation { get; set; }
+        public string MySQL_ServerURL { get; set; }
+        public int MySQL_Port { get; set; }
+        public string MySQL_Database { get; set; }
+        public string MySQL_Username { get; set; }
+        public string MySQL_Password { get; set; }
+        public string StorageFileLocation { get; set; }
+
 
         #endregion
 
         #region Nuget Tab
 
         public string NugetExePath { get; set; } = @"C:\Windows\System32\nuget.exe";
-        public string DefaultOutputPath { get; set; }
-        public string LocalNugetServer { get; set; }
-        public string LocalDevNugetServer { get; set; }
+        public string NugetDefaultOutputPath { get; set; }
+        public string NugetLocalNugetServer { get; set; }
+        public string NugetLocalDevNugetServer { get; set; }
 
         #endregion
     }
