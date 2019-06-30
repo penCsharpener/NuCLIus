@@ -1,5 +1,7 @@
-﻿using NuCLIus.Core.Contracts;
+﻿using MYaSyncQL.Client.Forms.Controls.Extensions;
+using NuCLIus.Core.Contracts;
 using NuCLIus.WinForms.Preferences;
+using NuCLIus.WinForms.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +24,15 @@ namespace NuCLIus.WinForms {
 
         private async void MainformLoad(object sender, EventArgs e) {
             await _startup.SetupAppDataFolder();
-            PreferencesToolStripMenuItem_Click(null, null);
+            InitControls();
         }
 
         private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
             new DlgPreferences(_startup.GetPreferenceService()).Show();
+        }
+
+        private void InitControls() {
+            panelUserControl.AddControl(new UCFiles());
         }
     }
 }

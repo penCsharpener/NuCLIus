@@ -73,6 +73,12 @@
     <Compile Include="Preferences\ViewModelPreferences.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\UCFiles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UCFiles.Designer.cs">
+      <DependentUpon>UCFiles.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Mainform.resx">
       <DependentUpon>Mainform.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\UCFiles.resx">
+      <DependentUpon>UCFiles.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="FodyWeavers.xsd">
       <SubType>Designer</SubType>
     </None>
