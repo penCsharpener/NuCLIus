@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NuCLIus.Core.Contracts;
+using System;
+using System.Diagnostics;
 
 namespace NuCLIus.Core.Entities {
-    public class Preference {
+    [DebuggerDisplay("Preference '{Name}'")]
+    public class Preference : IPrimary {
         public int ID { get; set; }
         public string Name { get; set; }
         public int Type { get; set; }
         public string ValueString { get; set; }
         public int ValueInt { get; set; }
+
+        public PreferenceTypes GetEnumType() => (PreferenceTypes)Type;
 
         public bool? GetBool() {
             if (((PreferenceTypes)Type) == PreferenceTypes.Bool) {
