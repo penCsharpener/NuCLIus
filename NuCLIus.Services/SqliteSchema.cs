@@ -36,7 +36,19 @@ CREATE INDEX ""nupkg_projectid_asc"" ON ""Nupkgs"" (
 	""Type""	INTEGER NOT NULL DEFAULT 1,
 	""ValueString""	TEXT,
 	""ValueInt""	INTEGER
-)";
+);
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('1', 'StorageMode', '2', '', '1');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('2', 'MySQL_ServerURL', '1', 'localhost', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('3', 'MySQL_Port', '2', '', '3306');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('4', 'MySQL_Database', '1', '', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('5', 'MySQL_Username', '1', 'root', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('6', 'MySQL_Password', '1', '', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('7', 'StorageFileLocation', '1', '%appdata%\NuCLIus\files', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('8', 'NugetExePath', '1', 'C:\Windows\System32\nuget.exe', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('9', 'NugetDefaultOutputPath', '1', '', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('10', 'NugetLocalNugetServer', '1', '', '');
+INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"", ""ValueInt"") VALUES ('11', 'NugetLocalDevNugetServer', '1', '', '');
+";
 
         internal const string PROJECTS = @"CREATE TABLE ""Projects"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
