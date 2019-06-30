@@ -9,8 +9,11 @@ namespace NuCLIus.Core.Contracts {
         string SqliteDatabaseLocation { get; }
 
         Task SetupStorageSolution(string filePath);
-
         Task<IEnumerable<RootFolder>> GetRootFolders();
         Task SaveRootFolder(RootFolder folder);
+        Task<IEnumerable<ScanIgnorePath>> GetIgnorePaths();
+        Task SaveIgnorePath(ScanIgnorePath ignorePath);
+        Task DeleteRootFolder(RootFolder folder);
+        Task DeleteIgnorePath(ScanIgnorePath ignorePath);
     }
 }

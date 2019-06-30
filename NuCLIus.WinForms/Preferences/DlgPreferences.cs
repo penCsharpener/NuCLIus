@@ -2,13 +2,6 @@
 using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NuCLIus.WinForms.Preferences {
@@ -16,6 +9,7 @@ namespace NuCLIus.WinForms.Preferences {
 
         private ToolTip _toolTips = new ToolTip();
         private DGVEnhancer<RootFolder> dgvProjectFolders;
+        private DGVEnhancer<ScanIgnorePath> dgvIgnorePaths;
         private ViewModelPreferences vm;
 
         public DlgPreferences(IPreferenceService preference) {
@@ -54,6 +48,19 @@ namespace NuCLIus.WinForms.Preferences {
                 new DGVColumnLayout(nameof(RootFolder.Path), "Path", 100, true, false),
                 new DGVColumnLayout(buttonColumn, 70, false, false),
             });
+            dgvIgnorePaths = new DGVEnhancer<ScanIgnorePath>(dataIgnorePaths);
+            dataIgnorePaths.DataSource = vm.BsIgnorePaths;
+            var buttonColumn2 = new DataGridViewButtonColumn() {
+                Text = "✘",
+                Name = "RemovePath",
+                HeaderText = "Remove",
+                Visible = true,
+                UseColumnTextForButtonValue = true,
+            };
+            dgvIgnorePaths.SetColumnLayout(new[] {
+                new DGVColumnLayout(nameof(ScanIgnorePath.Path), "Path", 100, true, false),
+                new DGVColumnLayout(buttonColumn2, 70, false, false),
+            });
 
             InitHandlers();
         }
@@ -61,6 +68,23 @@ namespace NuCLIus.WinForms.Preferences {
         private void InitHandlers() {
             btnAddRootFolder.Click += async (s, e) => {
                 await vm.AddRootFolder();
+            };
+            btnAddIgnorePath.Click += async (s, e) => {
+                await vm.AddIgnorePath();
+            };
+            dataProjectFolders.CellMouseClick += (s, e) => {
+                if (dataProjectFolders.Columns[e.ColumnIndex].Name == "RemovePath") {
+                    if (dataProjectFolders.Rows[e.RowIndex].DataBoundItem is RootFolder proj) {
+                        vm.Preference.StorageService.DeleteRootFolder(proj);
+                    }
+                }
+            };
+            dataIgnorePaths.CellMouseClick += (s, e) => {
+                if (dataIgnorePaths.Columns[e.ColumnIndex].Name == "RemovePath") {
+                    if (dataIgnorePaths.Rows[e.RowIndex].DataBoundItem is ScanIgnorePath sip) {
+                        vm.Preference.StorageService.DeleteIgnorePath(sip);
+                    }
+                }
             };
             InitBindings();
         }

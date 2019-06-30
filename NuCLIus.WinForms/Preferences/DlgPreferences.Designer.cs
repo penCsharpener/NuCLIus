@@ -66,6 +66,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNugetExePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataIgnorePaths = new System.Windows.Forms.DataGridView();
+            this.txtScanIgnorePaths = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnGetIgnorePath = new System.Windows.Forms.Button();
+            this.btnAddIgnorePath = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageApplication.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProjectFolders)).BeginInit();
@@ -75,6 +81,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMySqlPort)).BeginInit();
             this.tabPageNuget.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,10 +101,17 @@
             // 
             // tabPageApplication
             // 
+            this.tabPageApplication.AutoScroll = true;
+            this.tabPageApplication.Controls.Add(this.btnAddIgnorePath);
             this.tabPageApplication.Controls.Add(this.btnAddRootFolder);
+            this.tabPageApplication.Controls.Add(this.btnGetIgnorePath);
             this.tabPageApplication.Controls.Add(this.btnGetProjectPath);
+            this.tabPageApplication.Controls.Add(this.label18);
+            this.tabPageApplication.Controls.Add(this.label17);
             this.tabPageApplication.Controls.Add(this.label14);
+            this.tabPageApplication.Controls.Add(this.txtScanIgnorePaths);
             this.tabPageApplication.Controls.Add(this.label13);
+            this.tabPageApplication.Controls.Add(this.dataIgnorePaths);
             this.tabPageApplication.Controls.Add(this.txtRootProjectFolder);
             this.tabPageApplication.Controls.Add(this.dataProjectFolders);
             this.tabPageApplication.Location = new System.Drawing.Point(4, 36);
@@ -157,7 +171,7 @@
             this.dataProjectFolders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataProjectFolders.Location = new System.Drawing.Point(23, 85);
             this.dataProjectFolders.Name = "dataProjectFolders";
-            this.dataProjectFolders.Size = new System.Drawing.Size(578, 211);
+            this.dataProjectFolders.Size = new System.Drawing.Size(578, 137);
             this.dataProjectFolders.TabIndex = 0;
             // 
             // tabPageStorage
@@ -496,10 +510,10 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "default output path:";
             // 
-            // txtNugetpath
+            // txtNugetExePath
             // 
             this.txtNugetExePath.Location = new System.Drawing.Point(135, 20);
-            this.txtNugetExePath.Name = "txtNugetpath";
+            this.txtNugetExePath.Name = "txtNugetExePath";
             this.txtNugetExePath.Size = new System.Drawing.Size(314, 23);
             this.txtNugetExePath.TabIndex = 1;
             // 
@@ -511,6 +525,58 @@
             this.label1.Size = new System.Drawing.Size(88, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "nuget.exe path:";
+            // 
+            // dataIgnorePaths
+            // 
+            this.dataIgnorePaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataIgnorePaths.Location = new System.Drawing.Point(23, 303);
+            this.dataIgnorePaths.Name = "dataIgnorePaths";
+            this.dataIgnorePaths.Size = new System.Drawing.Size(578, 141);
+            this.dataIgnorePaths.TabIndex = 0;
+            // 
+            // txtScanIgnorePaths
+            // 
+            this.txtScanIgnorePaths.Location = new System.Drawing.Point(96, 274);
+            this.txtScanIgnorePaths.Name = "txtScanIgnorePaths";
+            this.txtScanIgnorePaths.Size = new System.Drawing.Size(420, 23);
+            this.txtScanIgnorePaths.TabIndex = 1;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(20, 277);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 15);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Folder path:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 237);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(110, 21);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Ignore Paths:";
+            // 
+            // btnGetIgnorePath
+            // 
+            this.btnGetIgnorePath.Location = new System.Drawing.Point(522, 274);
+            this.btnGetIgnorePath.Name = "btnGetIgnorePath";
+            this.btnGetIgnorePath.Size = new System.Drawing.Size(28, 23);
+            this.btnGetIgnorePath.TabIndex = 4;
+            this.btnGetIgnorePath.Text = "...";
+            this.btnGetIgnorePath.UseVisualStyleBackColor = true;
+            // 
+            // btnAddIgnorePath
+            // 
+            this.btnAddIgnorePath.Location = new System.Drawing.Point(556, 274);
+            this.btnAddIgnorePath.Name = "btnAddIgnorePath";
+            this.btnAddIgnorePath.Size = new System.Drawing.Size(45, 23);
+            this.btnAddIgnorePath.TabIndex = 4;
+            this.btnAddIgnorePath.Text = "Add";
+            this.btnAddIgnorePath.UseVisualStyleBackColor = true;
             // 
             // DlgPreferences
             // 
@@ -535,6 +601,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMySqlPort)).EndInit();
             this.tabPageNuget.ResumeLayout(false);
             this.tabPageNuget.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -584,5 +651,11 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnAddRootFolder;
         private System.Windows.Forms.Button btnGetProjectPath;
+        private System.Windows.Forms.Button btnAddIgnorePath;
+        private System.Windows.Forms.Button btnGetIgnorePath;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtScanIgnorePaths;
+        private System.Windows.Forms.DataGridView dataIgnorePaths;
     }
 }

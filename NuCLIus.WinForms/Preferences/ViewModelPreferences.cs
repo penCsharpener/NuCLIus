@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using penCsharpener.DotnetUtils;
 namespace NuCLIus.WinForms.Preferences {
     public class ViewModelPreferences : INotifyPropertyChanged {
         public IPreferenceService Preference { get; }
+        public IStorageService Storage => Preference.StorageService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,8 +31,10 @@ namespace NuCLIus.WinForms.Preferences {
         #region Application Tab
 
         public BindingSource BsRootFolders { get; set; }
+        public BindingSource BsIgnorePaths { get; set; }
 
         public string FolderPath { get; set; }
+        public string IgnorePath { get; set; }
 
         public async Task AddRootFolder() {
             if (string.IsNullOrWhiteSpace(FolderPath) == false && Directory.Exists(FolderPath)) {
@@ -48,8 +52,27 @@ namespace NuCLIus.WinForms.Preferences {
             }
         }
 
+        public async Task AddIgnorePath() {
+            if (string.IsNullOrWhiteSpace(FolderPath)) {
+                var ip = new ScanIgnorePath() {
+                    Path = IgnorePath,
+                    PathSha1 = IgnorePath.ToSha1(),
+                };
+                try {
+                    await Preference.StorageService.SaveIgnorePath(ip);
+                    await GetIgnorePaths();
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
         public async Task GetRootFolders() {
             BsRootFolders.DataSource = (await Preference.StorageService.GetRootFolders()).ToList();
+        }
+
+        public async Task GetIgnorePaths() {
+            BsIgnorePaths.DataSource = (await Preference.StorageService.GetIgnorePaths()).ToList();
         }
 
         public async Task SeedPreferences() {

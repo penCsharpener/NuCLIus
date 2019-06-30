@@ -40,10 +40,12 @@ namespace NuCLIus.Services {
                     await new SQLiteCommand(SqliteSchema.PREFERENCES, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.PROJECTS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.ROOTFOLDERS, db).ExecuteNonQueryAsync();
+                    await new SQLiteCommand(SqliteSchema.SCANIGNOREPATHS, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.SOLUTIONS, db).ExecuteNonQueryAsync();
-
+                    
                     await new SQLiteCommand(SqliteSchema.GITREPO_INDEXES, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.NUPKG_INDEXES, db).ExecuteNonQueryAsync();
+
                 });
             }
         }
@@ -55,6 +57,23 @@ namespace NuCLIus.Services {
         public async Task SaveRootFolder(RootFolder folder) {
             var id = await db.InsertAsync(folder);
             folder.ID = id;
+        }
+
+        public async Task<IEnumerable<ScanIgnorePath>> GetIgnorePaths() {
+            return await db.GetAllAsync<ScanIgnorePath>();
+        }
+
+        public async Task SaveIgnorePath(ScanIgnorePath ignorePath) {
+            var id = await db.InsertAsync(ignorePath);
+            ignorePath.ID = id;
+        }
+
+        public async Task DeleteRootFolder(RootFolder folder) {
+            await db.DeleteAsync(folder);
+        }
+
+        public async Task DeleteIgnorePath(ScanIgnorePath ignorePath) {
+            await db.DeleteAsync(ignorePath);
         }
     }
 }
