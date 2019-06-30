@@ -32,7 +32,7 @@ namespace NuCLIus.WinForms {
         }
 
         private void InitControls() {
-            panelUserControl.AddControl(new UCFiles());
+            panelUserControl.AddControl(new UCFiles(_startup));
         }
     }
 }

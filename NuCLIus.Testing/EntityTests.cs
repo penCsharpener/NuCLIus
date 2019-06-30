@@ -66,7 +66,8 @@ namespace Tests {
                 Path = path,
                 PathSha1 = path.ToSha1()
             });
-            IFileService fs = new FileService(new PreferenceService(storage));
+            IFileService fs = new FileService(new FileSearch(new PreferenceService(storage)),
+                                                             new FileStorage(storage));
             var filesFound = await fs.GetFiles();
             Assert.IsTrue(filesFound?.Count > 0);
         }

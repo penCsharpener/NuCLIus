@@ -6,5 +6,6 @@ namespace NuCLIus.Core.Contracts {
         object InitForm();
         IStorageService GetStorageService();
         IPreferenceService GetPreferenceService();
+        IFileService GetFileService();
     }
 }

@@ -16,6 +16,15 @@ namespace NuCLIus.WinForms {
         /// </summary>
         [STAThread]
         static void Main() {
+            Application.ThreadException += (s, e) => {
+                MessageBox.Show(e.Exception.ToString());
+                Environment.Exit(1);
+            };
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+                MessageBox.Show((e.ExceptionObject).ToString());
+                Environment.Exit(1);
+            };
+
             DI = DIContainer.Config();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

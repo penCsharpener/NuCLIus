@@ -79,6 +79,7 @@
     <Compile Include="Views\UCFiles.Designer.cs">
       <DependentUpon>UCFiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewModelFiles.cs" />
     <EmbeddedResource Include="Mainform.resx">
       <DependentUpon>Mainform.cs</DependentUpon>
     </EmbeddedResource>

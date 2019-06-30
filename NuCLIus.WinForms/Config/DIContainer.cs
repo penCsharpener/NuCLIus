@@ -1,11 +1,7 @@
 ﻿using Autofac;
 using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
 using NuCLIus.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NuCLIus.WinForms.Config {
     public static class DIContainer {
@@ -15,6 +11,8 @@ namespace NuCLIus.WinForms.Config {
             builder.RegisterType<PreferenceService>().As<IPreferenceService>().SingleInstance();
             builder.RegisterType<SqliteStorageService>().As<IStorageService>().SingleInstance();
             builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
+            builder.RegisterType<FileSearch>().As<IFileSearch>().SingleInstance();
+            builder.RegisterType<FileStorage>().As<IFileStorage>().SingleInstance();
             return builder.Build();
         }
     }
