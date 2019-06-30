@@ -14,6 +14,7 @@ namespace NuCLIus.WinForms.Config {
             builder.RegisterType<Startup>().As<IStartup>().SingleInstance();
             builder.RegisterType<PreferenceService>().As<IPreferenceService>().SingleInstance();
             builder.RegisterType<SqliteStorageService>().As<IStorageService>().SingleInstance();
+            builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
             return builder.Build();
         }
     }
