@@ -23,6 +23,7 @@ namespace NuCLIus.WinForms.Preferences {
 #if !RELEASE
             await vm.SeedPreferences();
 #endif
+            await vm.GetIgnorePaths();
         }
 
         private void InitControls() {
@@ -72,17 +73,17 @@ namespace NuCLIus.WinForms.Preferences {
             btnAddIgnorePath.Click += async (s, e) => {
                 await vm.AddIgnorePath();
             };
-            dataProjectFolders.CellMouseClick += (s, e) => {
+            dataProjectFolders.CellMouseClick += async (s, e) => {
                 if (dataProjectFolders.Columns[e.ColumnIndex].Name == "RemovePath") {
                     if (dataProjectFolders.Rows[e.RowIndex].DataBoundItem is RootFolder proj) {
-                        vm.Preference.StorageService.DeleteRootFolder(proj);
+                        await vm.Delete(proj);
                     }
                 }
             };
-            dataIgnorePaths.CellMouseClick += (s, e) => {
+            dataIgnorePaths.CellMouseClick += async (s, e) => {
                 if (dataIgnorePaths.Columns[e.ColumnIndex].Name == "RemovePath") {
                     if (dataIgnorePaths.Rows[e.RowIndex].DataBoundItem is ScanIgnorePath sip) {
-                        vm.Preference.StorageService.DeleteIgnorePath(sip);
+                        await vm.Delete(sip);
                     }
                 }
             };

@@ -21,6 +21,8 @@ namespace NuCLIus.WinForms.Preferences {
             this.Preference = preference;
             BsRootFolders = new BindingSource();
             BsRootFolders.DataSource = new List<RootFolder>();
+            BsIgnorePaths = new BindingSource();
+            BsIgnorePaths.DataSource = new List<ScanIgnorePath>();
             SqliteDBLocation = preference.StorageService.SqliteDatabaseLocation;
             PropertyChanged += async (s, e) => {
                 if (e.PropertyName == nameof(FolderPath)) return;
@@ -77,8 +79,22 @@ namespace NuCLIus.WinForms.Preferences {
 
         public async Task SeedPreferences() {
             FolderPath = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
-            await AddRootFolder();
+            if (!(await Preference.StorageService.GetRootFolders()).Any(x => x.PathSha1 == FolderPath.ToSha1())) {
+                await AddRootFolder();
+            } else {
+                await GetRootFolders();
+            }
             FolderPath = null;
+        }
+
+        public async Task Delete<T>(T entity) where T : class {
+            if (entity is RootFolder rf) {
+                await Preference.StorageService.DeleteRootFolder(rf);
+                BsRootFolders.DataSource = await Preference.StorageService.GetRootFolders();
+            } else if (entity is ScanIgnorePath sip) {
+                await Preference.StorageService.DeleteIgnorePath(sip);
+                BsIgnorePaths.DataSource = await Preference.StorageService.GetIgnorePaths();
+            }
         }
 
         #endregion
