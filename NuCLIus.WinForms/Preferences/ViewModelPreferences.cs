@@ -1,14 +1,14 @@
-﻿using System;
+﻿using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
+using NuCLIus.Core.Preferences;
+using penCsharpener.DotnetUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NuCLIus.Core.Contracts;
-using NuCLIus.Core.Entities;
-using penCsharpener.DotnetUtils;
 
 namespace NuCLIus.WinForms.Preferences {
     public class ViewModelPreferences : INotifyPropertyChanged {
@@ -23,7 +23,7 @@ namespace NuCLIus.WinForms.Preferences {
             BsRootFolders.DataSource = new List<RootFolder>();
             BsIgnorePaths = new BindingSource();
             BsIgnorePaths.DataSource = new List<ScanIgnorePath>();
-            SqliteDBLocation = preference.StorageService.SqliteDatabaseLocation;
+            SqliteDBLocation = Storage.SqliteDatabaseLocation;
             PropertyChanged += async (s, e) => {
                 if (e.PropertyName == nameof(FolderPath)) return;
                 else if (e.PropertyName == nameof(SqliteDBLocation)) return;
@@ -45,7 +45,7 @@ namespace NuCLIus.WinForms.Preferences {
                     PathSha1 = FolderPath.ToSha1()
                 };
                 try {
-                    await Preference.StorageService.SaveRootFolder(rf);
+                    await Storage.SaveEntity(rf);
                     await GetRootFolders();
                 } catch (Exception ex) {
                     // TODO: ILogger
@@ -61,7 +61,7 @@ namespace NuCLIus.WinForms.Preferences {
                     PathSha1 = IgnorePath.ToSha1(),
                 };
                 try {
-                    await Preference.StorageService.SaveIgnorePath(ip);
+                    await Storage.SaveEntity(ip);
                     await GetIgnorePaths();
                 } catch (Exception ex) {
                     MessageBox.Show(ex.ToString());
@@ -70,16 +70,16 @@ namespace NuCLIus.WinForms.Preferences {
         }
 
         public async Task GetRootFolders() {
-            BsRootFolders.DataSource = (await Preference.StorageService.GetRootFolders()).ToList();
+            BsRootFolders.DataSource = (await Storage.GetAll<RootFolder>()).ToList();
         }
 
         public async Task GetIgnorePaths() {
-            BsIgnorePaths.DataSource = (await Preference.StorageService.GetIgnorePaths()).ToList();
+            BsIgnorePaths.DataSource = (await Storage.GetAll<ScanIgnorePath>()).ToList();
         }
 
         public async Task SeedPreferences() {
             FolderPath = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
-            if (!(await Preference.StorageService.GetRootFolders()).Any(x => x.PathSha1 == FolderPath.ToSha1())) {
+            if (!(await Storage.GetAll<RootFolder>()).Any(x => x.PathSha1 == FolderPath.ToSha1())) {
                 await AddRootFolder();
             } else {
                 await GetRootFolders();
@@ -89,11 +89,11 @@ namespace NuCLIus.WinForms.Preferences {
 
         public async Task Delete<T>(T entity) where T : class {
             if (entity is RootFolder rf) {
-                await Preference.StorageService.DeleteRootFolder(rf);
-                BsRootFolders.DataSource = await Preference.StorageService.GetRootFolders();
+                await Storage.DeleteEntity(rf);
+                BsRootFolders.DataSource = await Storage.GetAll<RootFolder>();
             } else if (entity is ScanIgnorePath sip) {
-                await Preference.StorageService.DeleteIgnorePath(sip);
-                BsIgnorePaths.DataSource = await Preference.StorageService.GetIgnorePaths();
+                await Preference.StorageService.DeleteEntity(sip);
+                BsIgnorePaths.DataSource = await Preference.StorageService.GetAll<ScanIgnorePath>();
             }
         }
 

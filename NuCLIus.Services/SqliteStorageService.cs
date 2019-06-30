@@ -1,6 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
 using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -20,7 +21,7 @@ namespace NuCLIus.Services {
         public async Task SetupStorageSolution(string appdataPath) {
             SqliteDatabaseLocation = Path.Combine(appdataPath, DATABASENAME);
             // for development purposes: recreate on each debug build to apply 
-            // changed table schema
+            // changed table schema without migrations
             if (File.Exists(SqliteDatabaseLocation)) {
 #if !RELEASE
                 File.Delete(SqliteDatabaseLocation);
@@ -50,30 +51,21 @@ namespace NuCLIus.Services {
             }
         }
 
-        public async Task<IEnumerable<RootFolder>> GetRootFolders() {
-            return await db.GetAllAsync<RootFolder>();
+        public async Task<IEnumerable<T>> GetAll<T>() where T : class, IPrimary {
+            return await db.GetAllAsync<T>();
         }
 
-        public async Task SaveRootFolder(RootFolder folder) {
-            var id = await db.InsertAsync(folder);
-            folder.ID = id;
+        public async Task SaveEntity<T>(T entity) where T : class, IPrimary {
+            var id = await db.InsertAsync<T>(entity);
+            entity.ID = id;
         }
 
-        public async Task<IEnumerable<ScanIgnorePath>> GetIgnorePaths() {
-            return await db.GetAllAsync<ScanIgnorePath>();
+        public async Task DeleteEntity<T>(T entity) where T : class, IPrimary {
+            await db.DeleteAsync<T>(entity);
         }
 
-        public async Task SaveIgnorePath(ScanIgnorePath ignorePath) {
-            var id = await db.InsertAsync(ignorePath);
-            ignorePath.ID = id;
-        }
-
-        public async Task DeleteRootFolder(RootFolder folder) {
-            await db.DeleteAsync(folder);
-        }
-
-        public async Task DeleteIgnorePath(ScanIgnorePath ignorePath) {
-            await db.DeleteAsync(ignorePath);
+        public async Task UpdateEntity<T>(T entity) where T : class, IPrimary {
+            await db.UpdateAsync<T>(entity);
         }
     }
 }
