@@ -42,6 +42,9 @@ namespace NuCLIus.WinForms.Views {
         }
 
         private void InitHandlers() {
+            lnkFsRefresh.Click += async (s, e) => {
+                await vm.RefreshFromFs();
+            };
             InitBindings();
         }
 

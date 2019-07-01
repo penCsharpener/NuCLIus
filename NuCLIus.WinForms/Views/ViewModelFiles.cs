@@ -35,7 +35,7 @@ namespace NuCLIus.WinForms.Views {
 
         public string TextSearch { get; set; }
 
-        public async Task UpdateFilesData() {
+        public async Task UpdateFilesData(bool updateView = true) {
             IEnumerable<IFile> files = new List<IFile>();
             await await Task.Factory.StartNew( async () => {
                 files = await FileService.GetFiles();
@@ -44,6 +44,13 @@ namespace NuCLIus.WinForms.Views {
                 }
             });
             BsFiles.DataSource = files.ToList();
+        }
+
+        public async Task RefreshFromFs() {
+            await await Task.Factory.StartNew(async () => {
+                await FileService.RefreshFromFileSystem();
+            });
+            await UpdateFilesData(false);
         }
 
         #endregion

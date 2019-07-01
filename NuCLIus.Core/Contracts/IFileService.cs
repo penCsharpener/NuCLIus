@@ -6,5 +6,6 @@ namespace NuCLIus.Core.Contracts {
     public interface IFileService {
         ConcurrentDictionary<string, IFile> FoundFiles { get; }
         Task<List<IFile>> GetFiles();
+        Task RefreshFromFileSystem();
     }
 }

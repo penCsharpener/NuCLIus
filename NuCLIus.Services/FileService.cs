@@ -33,18 +33,31 @@ namespace NuCLIus.Services {
                 FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
             }
 
-            var foundFiles = new List<IFile>();
             if (!SearchAlready) {
-                foundFiles.AddRange(await _search.FindFiles());
+                await RefreshFromFileSystem();
                 SearchAlready = true;
             }
 
-            await Task.Factory.StartNew(() => {
+            return FoundFiles.Values.ToList();
+        }
+
+        public async Task UpdateStorage() {
+            foreach (var file in FoundFiles.Values) {
+                if (file.ID <= 0) {
+                    await _store.WriteNewFile(file);
+                }
+            }
+        }
+
+        public async Task RefreshFromFileSystem() {
+            var foundFiles = new List<IFile>();
+            foundFiles.AddRange(await _search.FindFiles());
+            await await Task.Factory.StartNew(async () => {
                 foreach (var file in foundFiles) {
                     FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
                 }
+                await UpdateStorage();
             });
-            return FoundFiles.Values.ToList();
         }
     }
 }

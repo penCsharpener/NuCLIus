@@ -64,6 +64,7 @@
             this.radList = new System.Windows.Forms.RadioButton();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.lnkFsRefresh = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataFiles)).BeginInit();
@@ -356,6 +357,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lnkFsRefresh);
             this.panel5.Controls.Add(this.txtSearch);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Location = new System.Drawing.Point(3, 4);
@@ -541,6 +543,16 @@
             this.checkBox8.Text = "Development Source";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
+            // lnkFsRefresh
+            // 
+            this.lnkFsRefresh.AutoSize = true;
+            this.lnkFsRefresh.Location = new System.Drawing.Point(52, 76);
+            this.lnkFsRefresh.Name = "lnkFsRefresh";
+            this.lnkFsRefresh.Size = new System.Drawing.Size(134, 15);
+            this.lnkFsRefresh.TabIndex = 4;
+            this.lnkFsRefresh.TabStop = true;
+            this.lnkFsRefresh.Text = "Refresh from file system";
+            // 
             // UCFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -620,5 +632,6 @@
         private System.Windows.Forms.RadioButton radList;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.LinkLabel lnkFsRefresh;
     }
 }
