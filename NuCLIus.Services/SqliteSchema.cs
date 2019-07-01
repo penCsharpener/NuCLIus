@@ -17,7 +17,7 @@ namespace NuCLIus.Services {
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
 	""ProjectID""	INTEGER,
-	""PathSha1""	TEXT NOT NULL,
+	""PathSha1""	TEXT NOT NULL UNIQUE,
 	""PackageSha256""	TEXT NOT NULL,
 	""PackageName""	TEXT NOT NULL,
 	""Version""	TEXT NOT NULL
@@ -53,7 +53,7 @@ INSERT INTO ""main"".""Preferences"" (""ID"", ""Name"", ""Type"", ""ValueString"
         internal const string PROJECTS = @"CREATE TABLE ""Projects"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
-	""PathSha1""	TEXT NOT NULL,
+	""PathSha1""	TEXT NOT NULL UNIQUE,
 	""SolutionID""	INTEGER,
 	""GitRepoID""	INTEGER
 )";
@@ -74,12 +74,13 @@ INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (2
 INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (3,'Debug','bd604d99e75e45d38bc7ac8fc714cde0097d901f');
 INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (4,'.vs','c3d833bba32fbff9e9618d7d87a10eca5acf72e7');
 INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (5,'obj','9b5c0b859faba061dd60fd8070fce74fcee29d0b');
-INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (6,'node_modules','9193e35d8b7fc33d768461505160c12c96c608bd');";
+INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (6,'node_modules','9193e35d8b7fc33d768461505160c12c96c608bd');
+INSERT INTO ""main"".""ScanIgnorePaths""(""ID"",""Path"",""PathSha1"") VALUES (7,'packages','d8ae088aee969371bf4ed994e9106b5d3e799c35');";
 
         internal const string SOLUTIONS = @"CREATE TABLE ""Solutions"" (
 	""ID""	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	""Path""	TEXT NOT NULL,
-	""PathSha1""	TEXT NOT NULL
+	""PathSha1""	TEXT NOT NULL UNIQUE
 )";
 
 

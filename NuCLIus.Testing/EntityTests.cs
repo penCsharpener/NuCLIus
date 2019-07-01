@@ -80,6 +80,7 @@ namespace Tests {
             var vs = ".vs".ToSha1();
             var obj = "obj".ToSha1();
             var node_modules = "node_modules".ToSha1();
+            var packages = "packages".ToSha1();
 
             Assert.Pass();
         }
