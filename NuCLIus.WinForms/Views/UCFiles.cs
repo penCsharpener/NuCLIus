@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Autofac;
 using NuCLIus.Core.Contracts;
 using MYaSyncQL.Client.Forms.Controls.Wrappers;
+using NuCLIus.Core.Entities;
 
 namespace NuCLIus.WinForms.Views {
     public partial class UCFiles : UserControl {
@@ -44,6 +45,15 @@ namespace NuCLIus.WinForms.Views {
         private void InitHandlers() {
             lnkFsRefresh.Click += async (s, e) => {
                 await vm.RefreshFromFs();
+            };
+            dataFiles.CellFormatting += (s, e) => {
+                if (dataFiles.Rows[e.RowIndex].DataBoundItem is Solution sln) {
+                    e.CellStyle.BackColor = Color.LightBlue;
+                } else if (dataFiles.Rows[e.RowIndex].DataBoundItem is Project proj) {
+                    e.CellStyle.BackColor = Color.LightYellow;
+                } else if (dataFiles.Rows[e.RowIndex].DataBoundItem is Nupkg nupkg) {
+                    e.CellStyle.BackColor = Color.LightGreen;
+                }
             };
             InitBindings();
         }
