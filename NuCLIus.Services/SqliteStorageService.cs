@@ -1,6 +1,8 @@
 ﻿using Dapper.Contrib.Extensions;
 using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
+using penCsharpener.DotnetUtils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -46,7 +48,12 @@ namespace NuCLIus.Services {
                     
                     await new SQLiteCommand(SqliteSchema.GITREPO_INDEXES, db).ExecuteNonQueryAsync();
                     await new SQLiteCommand(SqliteSchema.NUPKG_INDEXES, db).ExecuteNonQueryAsync();
-
+#if !RELEASE
+                    var rf = new RootFolder();
+                    rf.Path = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
+                    rf.PathSha1 = rf.Path.ToSha1();
+                    await SaveEntity(rf);
+#endif
                 });
             }
         }

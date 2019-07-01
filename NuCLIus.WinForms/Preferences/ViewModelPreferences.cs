@@ -132,16 +132,6 @@ namespace NuCLIus.WinForms.Preferences {
             }
         }
 
-        public async Task SeedPreferences() {
-            FolderPath = Environment.ExpandEnvironmentVariables(@"%userprofile%\Source\Repos");
-            if (!(await Storage.GetAll<RootFolder>()).Any(x => x.PathSha1 == FolderPath.ToSha1())) {
-                await AddRootFolder();
-            } else {
-                await GetRootFolders();
-            }
-            FolderPath = null;
-        }
-
         public async Task Delete<T>(T entity) where T : class {
             if (entity is RootFolder rf) {
                 await Storage.DeleteEntity(rf);

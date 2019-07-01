@@ -20,9 +20,6 @@ namespace NuCLIus.WinForms.Preferences {
 
         private async void DialogLoad(object sender, EventArgs e) {
             InitControls();
-#if !RELEASE
-            await vm.SeedPreferences();
-#endif
             await vm.GetIgnorePaths();
             await vm.PopulateSettings();
         }
