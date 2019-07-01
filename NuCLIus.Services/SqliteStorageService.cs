@@ -3,7 +3,6 @@ using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
 using penCsharpener.DotnetUtils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;

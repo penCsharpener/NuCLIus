@@ -74,15 +74,15 @@ namespace Tests {
 
         [Test]
         public void GetScanIgnorePathHashes() {
-            var git = ".git".ToSha1();
-            var Release = "Release".ToSha1();
-            var Debug = "Debug".ToSha1();
-            var vs = ".vs".ToSha1();
-            var obj = "obj".ToSha1();
-            var node_modules = "node_modules".ToSha1();
-            var packages = "packages".ToSha1();
-
-            Assert.Pass();
+            Assert.Pass(
+                "git: " + ".git".ToSha1() + Environment.NewLine +
+                "Release: " + "Release".ToSha1() + Environment.NewLine +
+                "Debug: " + "Debug".ToSha1() + Environment.NewLine +
+                ".vs: " + ".vs".ToSha1() + Environment.NewLine +
+                "obj: " + "obj".ToSha1() + Environment.NewLine +
+                "node_modules: " + "node_modules".ToSha1() + Environment.NewLine +
+                "packages: " + "packages".ToSha1() + Environment.NewLine
+                );
         }
     }
 }
