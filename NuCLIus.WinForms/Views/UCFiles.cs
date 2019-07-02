@@ -55,12 +55,28 @@ namespace NuCLIus.WinForms.Views {
                     e.CellStyle.BackColor = Color.LightGreen;
                 }
             };
+            radPack.CheckedChanged += RadNupkgCheckedChanged;
+            radRestore.CheckedChanged += RadNupkgCheckedChanged;
+            radAddNupkg.CheckedChanged += RadPackagingCheckedChanged;
+            radDelete.CheckedChanged += RadPackagingCheckedChanged;
+            radList.CheckedChanged += RadPackagingCheckedChanged;
             InitBindings();
+        }
+
+        private void RadNupkgCheckedChanged(object sender, EventArgs e) {
+            vm.OptionPack = radPack.Checked;
+            vm.OptionRestore = radRestore.Checked;
+        }
+
+        private void RadPackagingCheckedChanged(object sender, EventArgs e) {
+            vm.OptionAddNupkg = radAddNupkg.Checked;
+            vm.OptionDelete = radDelete.Checked;
+            vm.OptionList = radList.Checked;
         }
 
         private void InitBindings() {
             txtSearch.DataBindings.Add(nameof(txtSearch.Text), vm, nameof(vm.TextSearch), true, DataSourceUpdateMode.OnPropertyChanged);
-
+            txtCLIOutput.DataBindings.Add(nameof(txtCLIOutput.Text), vm, nameof(vm.CLIOutputLine), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }
