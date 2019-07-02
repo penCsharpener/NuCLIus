@@ -1,4 +1,5 @@
 ﻿using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
 using penCsharpener.DotnetUtils;
 using System;
 using System.Collections;
@@ -30,6 +31,10 @@ namespace NuCLIus.WinForms.Views {
         public BindingSource BsFiles { get; set; } = new BindingSource();
         public BindingSource BsMostFrequent { get; set; } = new BindingSource();
         public BindingSource BsNupkgLog { get; set; } = new BindingSource();
+        public IFile SelectedFile => BsFiles.Current as IFile;
+        public bool IsSolution => SelectedFile is Solution;
+        public bool IsProject => SelectedFile is Project;
+        public bool IsNupkg => SelectedFile is Nupkg;
 
         #region Files
 
