@@ -20,8 +20,21 @@ namespace NuCLIus.WinForms.Views {
             FileService = fileService;
             BsFiles.DataSource = new List<IFile>();
             PropertyChanged += async (s, e) => {
-                if (e.PropertyName == nameof(TextSearch)) {
+                Console.WriteLine(e.PropertyName);
+                switch (e.PropertyName) {
+                    case nameof(TextSearch):
                     await UpdateFilesData();
+                        break;
+                    case nameof(OptionPack):
+                        break;
+                    case nameof(OptionRestore):
+                        break;
+                    case nameof(OptionAddNupkg):
+                        break;
+                    case nameof(OptionDelete):
+                        break;
+                    case nameof(OptionList):
+                        break;
                 }
             };
         }
@@ -61,6 +74,23 @@ namespace NuCLIus.WinForms.Views {
         #endregion
 
         #region Nupkg
+
+        public bool OptionPack { get; set; }
+        public bool OptionRestore { get; set; }
+        public bool OptionAddNupkg { get; set; }
+        public bool OptionDelete { get; set; }
+        public bool OptionList { get; set; }
+        public bool ProductionSource { get; set; }
+        public bool DevSource { get; set; }
+        public string CLIOutputLine { get; set; }
+
+        public async Task ExecuteNupkgCmd() {
+
+        }
+
+        public async Task ExecutePackageCmd() {
+
+        }
 
         #endregion
 
