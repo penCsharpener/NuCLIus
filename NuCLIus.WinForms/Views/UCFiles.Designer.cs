@@ -49,12 +49,12 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxFileTypes = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkNupkg = new System.Windows.Forms.CheckBox();
+            this.chkSnupkg = new System.Windows.Forms.CheckBox();
+            this.chkVbProj = new System.Windows.Forms.CheckBox();
+            this.chkNuspec = new System.Windows.Forms.CheckBox();
+            this.chkSln = new System.Windows.Forms.CheckBox();
+            this.chkCsProj = new System.Windows.Forms.CheckBox();
             this.dataFiles = new System.Windows.Forms.DataGridView();
             this.panelDetails = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -377,12 +377,12 @@
             // 
             // groupBoxFileTypes
             // 
-            this.groupBoxFileTypes.Controls.Add(this.checkBox3);
-            this.groupBoxFileTypes.Controls.Add(this.checkBox5);
-            this.groupBoxFileTypes.Controls.Add(this.checkBox2);
-            this.groupBoxFileTypes.Controls.Add(this.checkBox6);
-            this.groupBoxFileTypes.Controls.Add(this.checkBox4);
-            this.groupBoxFileTypes.Controls.Add(this.checkBox1);
+            this.groupBoxFileTypes.Controls.Add(this.chkNupkg);
+            this.groupBoxFileTypes.Controls.Add(this.chkSnupkg);
+            this.groupBoxFileTypes.Controls.Add(this.chkVbProj);
+            this.groupBoxFileTypes.Controls.Add(this.chkNuspec);
+            this.groupBoxFileTypes.Controls.Add(this.chkSln);
+            this.groupBoxFileTypes.Controls.Add(this.chkCsProj);
             this.groupBoxFileTypes.Location = new System.Drawing.Point(262, 4);
             this.groupBoxFileTypes.Name = "groupBoxFileTypes";
             this.groupBoxFileTypes.Size = new System.Drawing.Size(202, 107);
@@ -390,65 +390,65 @@
             this.groupBoxFileTypes.TabStop = false;
             this.groupBoxFileTypes.Text = "File Types";
             // 
-            // checkBox3
+            // chkNupkg
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 72);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(63, 19);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.Text = ".nupkg";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkNupkg.AutoSize = true;
+            this.chkNupkg.Location = new System.Drawing.Point(6, 72);
+            this.chkNupkg.Name = "chkNupkg";
+            this.chkNupkg.Size = new System.Drawing.Size(63, 19);
+            this.chkNupkg.TabIndex = 0;
+            this.chkNupkg.Text = ".nupkg";
+            this.chkNupkg.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // chkSnupkg
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(82, 72);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(68, 19);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = ".snupkg";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.chkSnupkg.AutoSize = true;
+            this.chkSnupkg.Location = new System.Drawing.Point(82, 72);
+            this.chkSnupkg.Name = "chkSnupkg";
+            this.chkSnupkg.Size = new System.Drawing.Size(68, 19);
+            this.chkSnupkg.TabIndex = 0;
+            this.chkSnupkg.Text = ".snupkg";
+            this.chkSnupkg.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkVbProj
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 47);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(63, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = ".vbproj";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkVbProj.AutoSize = true;
+            this.chkVbProj.Location = new System.Drawing.Point(6, 47);
+            this.chkVbProj.Name = "chkVbProj";
+            this.chkVbProj.Size = new System.Drawing.Size(63, 19);
+            this.chkVbProj.TabIndex = 0;
+            this.chkVbProj.Text = ".vbproj";
+            this.chkVbProj.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // chkNuspec
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(82, 47);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(67, 19);
-            this.checkBox6.TabIndex = 0;
-            this.checkBox6.Text = ".nuspec";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.chkNuspec.AutoSize = true;
+            this.chkNuspec.Location = new System.Drawing.Point(82, 47);
+            this.chkNuspec.Name = "chkNuspec";
+            this.chkNuspec.Size = new System.Drawing.Size(67, 19);
+            this.chkNuspec.TabIndex = 0;
+            this.chkNuspec.Text = ".nuspec";
+            this.chkNuspec.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chkSln
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(82, 22);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(44, 19);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = ".sln";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkSln.AutoSize = true;
+            this.chkSln.Location = new System.Drawing.Point(82, 22);
+            this.chkSln.Name = "chkSln";
+            this.chkSln.Size = new System.Drawing.Size(44, 19);
+            this.chkSln.TabIndex = 0;
+            this.chkSln.Text = ".sln";
+            this.chkSln.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chkCsProj
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 22);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(61, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = ".csproj";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkCsProj.AutoSize = true;
+            this.chkCsProj.Location = new System.Drawing.Point(6, 22);
+            this.chkCsProj.Name = "chkCsProj";
+            this.chkCsProj.Size = new System.Drawing.Size(61, 19);
+            this.chkCsProj.TabIndex = 0;
+            this.chkCsProj.Text = ".csproj";
+            this.chkCsProj.UseVisualStyleBackColor = true;
             // 
             // dataFiles
             // 
@@ -605,13 +605,13 @@
         private System.Windows.Forms.TextBox txtCLIOutput;
         private System.Windows.Forms.DataGridView dataFrequentlyUsed;
         private System.Windows.Forms.DataGridView dataRecentNupkg;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkCsProj;
         private System.Windows.Forms.GroupBox groupBoxFileTypes;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox chkNupkg;
+        private System.Windows.Forms.CheckBox chkVbProj;
+        private System.Windows.Forms.CheckBox chkSnupkg;
+        private System.Windows.Forms.CheckBox chkSln;
+        private System.Windows.Forms.CheckBox chkNuspec;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Panel panel5;

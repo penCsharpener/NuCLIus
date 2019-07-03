@@ -23,6 +23,12 @@ namespace NuCLIus.WinForms.Views {
                 Console.WriteLine(e.PropertyName);
                 switch (e.PropertyName) {
                     case nameof(TextSearch):
+                    case nameof(CheckCsProj):
+                    case nameof(CheckVbProj):
+                    case nameof(CheckNupkg):
+                    case nameof(CheckSln):
+                    case nameof(CheckNuspec):
+                    case nameof(CheckSnupkg):
                     await UpdateFilesData();
                         break;
                     case nameof(OptionPack):
@@ -51,6 +57,12 @@ namespace NuCLIus.WinForms.Views {
 
         #region Files
 
+        public bool CheckCsProj { get; set; } = true;
+        public bool CheckVbProj { get; set; } = true;
+        public bool CheckNupkg { get; set; } = true;
+        public bool CheckSln { get; set; } = true;
+        public bool CheckNuspec { get; set; } = true;
+        public bool CheckSnupkg { get; set; } = true;
         public string TextSearch { get; set; }
 
         public async Task UpdateFilesData(bool updateView = true) {
@@ -60,6 +72,26 @@ namespace NuCLIus.WinForms.Views {
                 if (!string.IsNullOrWhiteSpace(TextSearch)) {
                     files = files.Where(x => x.Path.Like(TextSearch));
                 }
+                var selectedFiles = new List<IFile>();
+                if (CheckCsProj) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase)));
+                }
+                if (CheckVbProj) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".vbproj", StringComparison.OrdinalIgnoreCase)));
+                }
+                if (CheckNupkg) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".nupkg", StringComparison.OrdinalIgnoreCase)));
+                }
+                if (CheckSln) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".sln", StringComparison.OrdinalIgnoreCase)));
+                }
+                if (CheckNuspec) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".nuspec", StringComparison.OrdinalIgnoreCase)));
+                }
+                if (CheckSnupkg) {
+                    selectedFiles.AddRange(files.Where(x => x.Path.EndsWith(".snupkg", StringComparison.OrdinalIgnoreCase)));
+                }
+                files = selectedFiles.OrderBy(x => x.Path);
             });
             BsFiles.DataSource = files.ToList();
         }

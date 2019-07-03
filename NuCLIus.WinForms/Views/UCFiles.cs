@@ -77,6 +77,13 @@ namespace NuCLIus.WinForms.Views {
         private void InitBindings() {
             txtSearch.DataBindings.Add(nameof(txtSearch.Text), vm, nameof(vm.TextSearch), true, DataSourceUpdateMode.OnPropertyChanged);
             txtCLIOutput.DataBindings.Add(nameof(txtCLIOutput.Text), vm, nameof(vm.CLIOutputLine), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkCsProj.DataBindings.Add(nameof(chkCsProj.Checked), vm, nameof(vm.CheckCsProj), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkVbProj.DataBindings.Add(nameof(chkVbProj.Checked), vm, nameof(vm.CheckVbProj), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkNupkg.DataBindings.Add(nameof(chkNupkg.Checked), vm, nameof(vm.CheckNupkg), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkSln.DataBindings.Add(nameof(chkSln.Checked), vm, nameof(vm.CheckSln), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkNuspec.DataBindings.Add(nameof(chkNuspec.Checked), vm, nameof(vm.CheckNuspec), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkSnupkg.DataBindings.Add(nameof(chkSnupkg.Checked), vm, nameof(vm.CheckSnupkg), true, DataSourceUpdateMode.OnPropertyChanged);
+
         }
     }
 }
