@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj" />
     <ProjectReference Include="..\..\MYaSyncQL\src\MYaSyncQL.Client.Forms.Controls\MYaSyncQL.Client.Forms.Controls.csproj" />
+    <ProjectReference Include="..\NuCLIus.NugetCLI\NuCLIus.NugetCLI.csproj" />
   </ItemGroup>
 
 </Project>

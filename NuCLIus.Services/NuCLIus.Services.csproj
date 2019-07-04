@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\dotnet-utils\dotnet-utils.csproj" />
     <ProjectReference Include="..\NuCLIus.Core\NuCLIus.Core.csproj" />
+    <ProjectReference Include="..\NuCLIus.NugetCLI\NuCLIus.NugetCLI.csproj" />
   </ItemGroup>
 
 </Project>
