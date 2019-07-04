@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NuCLIus.Core.Contracts.Nuget {
+namespace NuCLIus.NugetCLI.Interfaces {
     public interface INugetPackProperties {
+        
         INugetPackProperties Configuration(string config = "Release");
-        INugetPackProperties VersionSuffix(string suffix);
-        INugetPack CloseProperties();
+        string Close();
     }
 }

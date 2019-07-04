@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYaSyncQL.Client.Forms.Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-utils", "..\dotnet-utils\dotnet-utils.csproj", "{A170A8FF-45A0-4587-8BC8-596913F8AF58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCLIus.NugetCLI", "NuCLIus.NugetCLI\NuCLIus.NugetCLI.csproj", "{04B96821-D7D8-4334-8F1F-930378453993}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A170A8FF-45A0-4587-8BC8-596913F8AF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B96821-D7D8-4334-8F1F-930378453993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B96821-D7D8-4334-8F1F-930378453993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B96821-D7D8-4334-8F1F-930378453993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B96821-D7D8-4334-8F1F-930378453993}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
