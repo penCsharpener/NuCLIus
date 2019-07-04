@@ -1,4 +1,5 @@
 ﻿using NuCLIus.Core.Entities;
+using SqlKata;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,6 @@ namespace NuCLIus.Core.Contracts {
         Task SaveEntity<T>(T entity) where T : class, IPrimary;
         Task DeleteEntity<T>(T entity) where T : class, IPrimary;
         Task UpdateEntity<T>(T entity) where T : class, IPrimary;
+        Task<IEnumerable<T>> Select<T>(Query query) where T: class, IPrimary;
     }
 }
