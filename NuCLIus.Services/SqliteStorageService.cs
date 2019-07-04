@@ -2,6 +2,9 @@
 using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
 using penCsharpener.DotnetUtils;
+using SqlKata;
+using SqlKata.Compilers;
+using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -12,6 +15,7 @@ namespace NuCLIus.Services {
     public class SqliteStorageService : IStorageService {
 
         public const string DATABASENAME = "nuclius.db";
+        private static SqliteCompiler compiler = new SqliteCompiler();
         public string SqliteDatabaseLocation { get; private set; }
         private SQLiteConnection db;
 
@@ -72,6 +76,11 @@ namespace NuCLIus.Services {
 
         public async Task UpdateEntity<T>(T entity) where T : class, IPrimary {
             await db.UpdateAsync<T>(entity);
+        }
+
+        public async Task<IEnumerable<T>> Select<T>(Query query) where T : class, IPrimary {
+            var qf = new QueryFactory(db, compiler);
+            return await qf.FromQuery(query).GetAsync<T>();
         }
     }
 }
