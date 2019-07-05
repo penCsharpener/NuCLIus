@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace NuCLIus.NugetCLI.Interfaces {
-    public interface INugetPackOptions {
+    public interface INugetPackOptions : INugetOut {
 
         INugetPackOptions Build();
         INugetPackOptions Exclude(string filter);

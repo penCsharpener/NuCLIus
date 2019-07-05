@@ -121,8 +121,6 @@ namespace NuCLIus.NugetCLI {
             return this;
         }
 
-        public string Close() => sb.ToString();
-
         public INugetPackOptions VersionSuffix(string suffix) {
             sb.Append("-Suffix ").Append(suffix);
             return this;
@@ -140,8 +138,6 @@ namespace NuCLIus.NugetCLI {
 
         #endregion
 
-        public override string ToString() {
-            return sb.ToString();
-        }
+        public string Out => sb.ToString();
     }
 }
