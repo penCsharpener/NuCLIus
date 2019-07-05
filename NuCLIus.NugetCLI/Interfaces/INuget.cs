@@ -8,5 +8,6 @@ namespace NuCLIus.NugetCLI.Interfaces {
         INugetAddOptions Add(string filePath);
         INugetPackOptions Pack(string path);
         INugetDeleteOptions Delete(string packageID);
+
     }
 }
