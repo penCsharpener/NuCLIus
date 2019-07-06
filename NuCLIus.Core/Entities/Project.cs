@@ -44,5 +44,13 @@ namespace NuCLIus.Core.Entities {
                 return null;
             }
         }
+
+        public DirectoryInfo GetDirectoryInfo() {
+            return File.Exists(Path) ? new DirectoryInfo(System.IO.Path.GetDirectoryName(Path)) : null;
+        }
+
+        public FileInfo GetFileInfo() {
+            return File.Exists(Path) ? new FileInfo(Path) : null;
+        }
     }
 }
