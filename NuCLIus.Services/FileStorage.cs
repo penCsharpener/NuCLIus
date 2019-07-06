@@ -26,17 +26,12 @@ namespace NuCLIus.Services {
         }
 
         public async Task WriteNewFile(IFile file) {
-            try {
-                if (file is Solution sln) {
-                    await _storage.SaveEntity(sln);
-                } else if (file is Project proj) {
-                    await _storage.SaveEntity(proj);
-                } else if (file is Nupkg nupkg
-                            && nupkg.Version != null) {
-                    await _storage.SaveEntity(nupkg);
-                }
-            } catch (Exception ex) {
-                Console.WriteLine(ex.ToString());
+            if (file is Solution sln) {
+                await _storage.SaveEntity(sln);
+            } else if (file is Project proj) {
+                await _storage.SaveEntity(proj);
+            } else if (file is Nupkg nupkg && nupkg.Version != null) {
+                await _storage.SaveEntity(nupkg);
             }
         }
     }
