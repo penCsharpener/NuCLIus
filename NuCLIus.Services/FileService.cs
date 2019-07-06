@@ -1,9 +1,7 @@
 ﻿using NuCLIus.Core.Contracts;
-using NuCLIus.Core.Entities;
-using penCsharpener.DotnetUtils;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,7 +42,11 @@ namespace NuCLIus.Services {
         public async Task UpdateStorage() {
             foreach (var file in FoundFiles.Values) {
                 if (file.ID <= 0) {
-                    await _store.WriteNewFile(file);
+                    try {
+                        await _store.WriteNewFile(file);
+                    } catch (Exception ex) {
+                        Console.WriteLine($"{ex}");
+                    }
                 }
             }
         }
