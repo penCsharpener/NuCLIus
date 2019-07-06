@@ -3,6 +3,7 @@ using penCsharpener.DotnetUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -39,6 +40,14 @@ namespace NuCLIus.Core.Entities {
                                         .Replace($".{Version}", "");
 
             return this;
+        }
+
+        public DirectoryInfo GetDirectoryInfo() {
+            return File.Exists(Path) ? new DirectoryInfo(System.IO.Path.GetDirectoryName(Path)) : null;
+        }
+
+        public FileInfo GetFileInfo() {
+            return File.Exists(Path) ? new FileInfo(Path) : null;
         }
     }
 }
