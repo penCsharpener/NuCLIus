@@ -95,7 +95,16 @@ namespace NuCLIus.NugetCLI {
             return this;
         }
 
+        /// <summary>
+        /// a null or whitespace path will omit this option entirely but not throw exception
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="createIfNotExists"></param>
+        /// <returns></returns>
         public INugetPackOptions OutputDirectory(string path, bool createIfNotExists = false) {
+            if (string.IsNullOrWhiteSpace(path)) {
+                return this;
+            }
             if (!Directory.Exists(path)) {
                 if (createIfNotExists) {
                     Directory.CreateDirectory(path);
