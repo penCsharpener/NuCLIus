@@ -25,7 +25,7 @@ namespace NuCLIus.NugetCLI.Run {
                 FileName = "cmd.exe",
                 Arguments = "/C " + command,
                 UseShellExecute = false,
-                CreateNoWindow = false,
+                CreateNoWindow = true,
                 RedirectStandardOutput = true,
             };
             if (!string.IsNullOrWhiteSpace(workingDir)) {
