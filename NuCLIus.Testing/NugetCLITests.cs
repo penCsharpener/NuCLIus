@@ -19,7 +19,6 @@ namespace Tests {
             
         }
 
-
         [TestCase("Execute", false)]
         [TestCase("Execute", true)]
         public async Task NugetPackTest(string desc, bool doExecute) {

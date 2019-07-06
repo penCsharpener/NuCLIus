@@ -18,6 +18,10 @@ namespace NuCLIus.Core.Entities {
         public string PackageName { get; set; }
         public string Version { get; set; }
 
+        /// <summary>
+        /// populates PackageName and Version properties from the file's name
+        /// </summary>
+        /// <returns></returns>
         public Nupkg DetermineNugetInfo() {
             var parts = System.IO.Path.GetFileNameWithoutExtension(Path)
                                       .Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries);
