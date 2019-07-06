@@ -1,26 +1,43 @@
 using NuCLIus.NugetCLI;
+using NuCLIus.NugetCLI.Interfaces;
+using NuCLIus.NugetCLI.Run;
 using NUnit.Framework;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Tests {
     public class NugetCLITests {
 
+        private IRunNuget run;
+
         [SetUp]
         public void Setup() {
-            Nuget.Validate = false;
+            Nuget.Validate = true;
+            run = new NugetWinRun();
+            
         }
 
-        [TestCase(ExpectedResult = @"nuget pack ..\..\..\..\NuCLIus.Services\NuCLIus.Services.csproj " +
-                                   @"-OutputDirectory E:\NuCLIusTests -Build -Properties Configuration=Release")]
-        public string NugetPackTest() {
-            return Nuget.Init()
+
+        [TestCase("Execute", false)]
+        [TestCase("Execute", true)]
+        public async Task NugetPackTest(string desc, bool doExecute) {
+            var cmd = Nuget.Init()
                         .Pack(@"..\..\..\..\NuCLIus.Services\NuCLIus.Services.csproj")
                         .OutputDirectory("E:\\NuCLIusTests", createIfNotExists: true)
-                        .Build()
                         .Properties()
                         .Configuration()
                         .Out;
+            Debug.WriteLine(cmd);
+            run.GetCmdStandardOutput += (s, stdout) => {
+                Debug.WriteLine(stdout);
+            };
+            if (doExecute) {
+                await run.RunAsync(cmd);
+            }
+            Assert.IsTrue(cmd == @"nuget pack ..\..\..\..\NuCLIus.Services\NuCLIus.Services.csproj " +
+                                 @"-OutputDirectory E:\NuCLIusTests -Properties Configuration=Release");
         }
 
         [TestCase(ExpectedResult = @"nuget add ..\..\..\..\NuCLIus.Services\NuCLIus.Services.1.0.0.nupkg " +
