@@ -25,7 +25,7 @@ namespace NuCLIus.Services {
             _search = searcher;
         }
 
-        public bool SearchAlready { get; set; }
+        public bool SearchedAlready { get; set; }
 
         public async Task<List<IFile>> GetFiles() {
             var fromStorage = await _store.GetFiles();
@@ -33,9 +33,9 @@ namespace NuCLIus.Services {
                 FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
             }
 
-            if (!SearchAlready) {
+            if (!SearchedAlready) {
                 await RefreshFromFileSystem();
-                SearchAlready = true;
+                SearchedAlready = true;
             }
 
             return FoundFiles.Values.ToList();
@@ -53,7 +53,7 @@ namespace NuCLIus.Services {
             var foundFiles = new List<IFile>();
             foundFiles.AddRange(await _search.FindFiles());
             await await Task.Factory.StartNew(async () => {
-                foreach (var file in foundFiles) {
+                foreach (var file in foundFiles.Where(x => !FoundFiles.Keys.Contains(x.PathSha1))) {
                     FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
                 }
                 await UpdateStorage();
