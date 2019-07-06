@@ -2,9 +2,6 @@
 using NuCLIus.Core.Contracts;
 using NuCLIus.WinForms.Config;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NuCLIus.WinForms {
