@@ -8,26 +8,30 @@ using System.Threading.Tasks;
 
 namespace NuCLIus.NugetCLI.Run {
     public class NugetWinRun : IRunNuget {
-        public void Run(string command) {
+        public void Run(string command, string workingDir = null) {
             var proc = Process.Start(GetProcessInfo(command));
             OnGetCmdStandardOutput(proc.StandardOutput);
         }
 
-        public async Task RunAsync(string command) {
+        public async Task RunAsync(string command, string workingDir = null) {
             await await Task.Factory.StartNew(async () => {
                 var proc = Process.Start(GetProcessInfo(command));
                 await OnGetCmdStandardOutputAsync(proc.StandardOutput);
             });
         }
 
-        private ProcessStartInfo GetProcessInfo(string command) {
-            return new ProcessStartInfo() {
+        private ProcessStartInfo GetProcessInfo(string command, string workingDir = null) {
+            var info = new ProcessStartInfo() {
                 FileName = "cmd.exe",
                 Arguments = "/C " + command,
                 UseShellExecute = false,
                 CreateNoWindow = false,
                 RedirectStandardOutput = true,
             };
+            if (!string.IsNullOrWhiteSpace(workingDir)) {
+                info.WorkingDirectory = workingDir;
+            }
+            return info;
         }
 
         public event EventHandler<string> GetCmdStandardOutput;

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace NuCLIus.NugetCLI.Interfaces {
     public interface IRunNuget {
-        Task RunAsync(string command);
-        void Run(string command);
+        Task RunAsync(string command, string workingDir = null);
+        void Run(string command, string workingDir = null);
         event EventHandler<string> GetCmdStandardOutput;
     }
 }
