@@ -6,7 +6,7 @@ using System.Text;
 namespace NuCLIus.NugetCLI.Utils {
     public static class NugetExtensions {
         internal static string EnQuote(this string str) {
-            return str.Contains(" ") ? $"'{str}'" : str;
+            return str.Contains(" ") ? $"\"{str}\"" : str;
         }
 
         internal static void FileValidate(this string filePath) {
