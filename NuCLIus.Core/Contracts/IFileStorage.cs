@@ -7,5 +7,6 @@ namespace NuCLIus.Core.Contracts {
     public interface IFileStorage {
         Task<List<IFile>> GetFiles();
         Task WriteNewFile(IFile file);
+        Task DeleteFile<T>(T file) where T : class, IFile;
     }
 }

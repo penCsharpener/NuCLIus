@@ -1,4 +1,5 @@
 ﻿using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -30,6 +31,11 @@ namespace NuCLIus.Services {
             foreach (var file in fromStorage) {
                 FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
             }
+            foreach (var dictItem in FoundFiles.Values) {
+                if (!fromStorage.Any(x => x.PathSha1 == dictItem.PathSha1)) {
+                    FoundFiles.TryRemove(dictItem.PathSha1, out var deletedItem);
+                }
+            }
 
             if (!SearchedAlready) {
                 await RefreshFromFileSystem();
@@ -59,6 +65,11 @@ namespace NuCLIus.Services {
                     FoundFiles.AddOrUpdate(file.PathSha1, file, (k, v) => v = file);
                 }
                 await UpdateStorage();
+                foreach (var file in FoundFiles.Values.Where(x => x.GetFileInfo() == null)) {
+                    if (file is Nupkg nu) await _store.DeleteFile(nu);
+                    else if (file is Project pj) await _store.DeleteFile(pj);
+                    else if (file is Solution sol) await _store.DeleteFile(sol);
+                }
             });
         }
 

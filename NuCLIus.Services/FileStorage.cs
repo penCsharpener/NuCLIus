@@ -17,6 +17,10 @@ namespace NuCLIus.Services {
             _storage = storage;
         }
 
+        public async Task DeleteFile<T>(T file) where T : class, IFile {
+            await _storage.DeleteEntity(file);
+        }
+
         public async Task<List<IFile>> GetFiles() {
             var storedFiles = new List<IFile>();
             storedFiles.AddRange(await _storage.GetAll<Project>());
