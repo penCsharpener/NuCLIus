@@ -29,7 +29,9 @@ namespace NuCLIus.Services {
             // changed table schema without migrations
             if (File.Exists(SqliteDatabaseLocation)) {
 #if !RELEASE
-                File.Delete(SqliteDatabaseLocation);
+                try {
+                    File.Delete(SqliteDatabaseLocation);
+                } catch { }
 #endif
             }
             var dbExisted = File.Exists(SqliteDatabaseLocation);
