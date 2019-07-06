@@ -22,7 +22,7 @@ namespace NuCLIus.WinForms.Views {
         public UCFiles(IStartup startup) {
             InitializeComponent();
             _startup = startup;
-            vm = new ViewModelFiles(_startup.GetPreferenceService(), _startup.GetFileService());
+            vm = new ViewModelFiles(_startup.GetPreferenceService(), _startup.GetFileService(), _startup.GetRunNuget());
             Load += UCFilesLoad;
         }
 
@@ -55,6 +55,12 @@ namespace NuCLIus.WinForms.Views {
                     e.CellStyle.BackColor = Color.LightGreen;
                 }
             };
+            btnExecuteNupkg.Click += async (s, e) => {
+                await vm.ExecuteNupkgCmd();
+            };
+            btnExecutePackageSource.Click += async (s, e) => {
+                await vm.ExecutePackageCmd();
+            };
             radPack.CheckedChanged += RadNupkgCheckedChanged;
             radRestore.CheckedChanged += RadNupkgCheckedChanged;
             radAddNupkg.CheckedChanged += RadPackagingCheckedChanged;
@@ -83,7 +89,8 @@ namespace NuCLIus.WinForms.Views {
             chkSln.DataBindings.Add(nameof(chkSln.Checked), vm, nameof(vm.CheckSln), true, DataSourceUpdateMode.OnPropertyChanged);
             chkNuspec.DataBindings.Add(nameof(chkNuspec.Checked), vm, nameof(vm.CheckNuspec), true, DataSourceUpdateMode.OnPropertyChanged);
             chkSnupkg.DataBindings.Add(nameof(chkSnupkg.Checked), vm, nameof(vm.CheckSnupkg), true, DataSourceUpdateMode.OnPropertyChanged);
-
+            chkSourceProduction.DataBindings.Add(nameof(chkSourceProduction.Checked), vm, nameof(vm.CheckProductionSource), true, DataSourceUpdateMode.OnPropertyChanged);
+            chkSourceDevelopment.DataBindings.Add(nameof(chkSourceDevelopment.Checked), vm, nameof(vm.CheckDevSource), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

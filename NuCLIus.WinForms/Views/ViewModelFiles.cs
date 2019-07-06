@@ -1,12 +1,15 @@
-﻿using NuCLIus.Core.Contracts;
+﻿using Autofac;
+using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
+using NuCLIus.Core.Preferences;
+using NuCLIus.NugetCLI;
+using NuCLIus.NugetCLI.Interfaces;
 using penCsharpener.DotnetUtils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,10 +17,14 @@ namespace NuCLIus.WinForms.Views {
     public class ViewModelFiles : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly IRunNuget _runNuget;
+
         public ViewModelFiles(IPreferenceService preferenceService,
-                              IFileService fileService) {
+                              IFileService fileService,
+                              IRunNuget runNuget) {
             PreferenceService = preferenceService;
             FileService = fileService;
+            _runNuget = runNuget;
             BsFiles.DataSource = new List<IFile>();
             PropertyChanged += async (s, e) => {
                 Console.WriteLine(e.PropertyName);
@@ -32,15 +39,43 @@ namespace NuCLIus.WinForms.Views {
                     await UpdateFilesData();
                         break;
                     case nameof(OptionPack):
-                        break;
                     case nameof(OptionRestore):
-                        break;
-                    case nameof(OptionAddNupkg):
-                        break;
-                    case nameof(OptionDelete):
-                        break;
                     case nameof(OptionList):
                         break;
+                    case nameof(OptionDelete):
+                    case nameof(OptionAddNupkg):
+                        CheckProductionSource = true;
+                        break;
+                }
+            };
+            _runNuget.GetCmdStandardOutput += async (s, e) => {
+                try {
+                    if (e.Contains("Successfully created package")) {
+                        var pathLine = e.Split("'".ToArray(), StringSplitOptions.RemoveEmptyEntries).LastOrDefault(x => x.Contains(":\\") && x.Contains(".nupkg"));
+                        if (pathLine != null && File.Exists(pathLine)) {
+                            var createFileInfo = new FileInfo(pathLine);
+                            if (CheckDevSource) {
+                                var devSourceCopy = await PreferenceService.GetSetting(Settings.NugetLocalDevNugetServer);
+                                if (!string.IsNullOrWhiteSpace(devSourceCopy.ValueString)) {
+                                    var devSourceFileInfo = new FileInfo(Path.Combine(devSourceCopy.ValueString, createFileInfo.Name));
+                                    File.Copy(createFileInfo.FullName, devSourceFileInfo.FullName, true);
+                                }
+                            }
+                            try {
+                                var newNupkg = new Nupkg() {
+                                    Path = pathLine,
+                                    PathSha1 = pathLine.ToSha1(),
+                                    ProjectID = (SelectedFile as Project)?.ID ?? 0,
+                                    PackageSha256 = createFileInfo.ToSha256(),
+                                }.DetermineNugetInfo();
+                                await FileService.WriteFileToStorage(newNupkg);
+                            } catch (Exception ex) {
+                                MessageBox.Show($"Writing new nuget package to storage failed:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show($"ViewModelFiles:\r\n{ex.Message}", "Error: copying to Dev Source", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             };
         }
@@ -112,16 +147,62 @@ namespace NuCLIus.WinForms.Views {
         public bool OptionAddNupkg { get; set; }
         public bool OptionDelete { get; set; }
         public bool OptionList { get; set; }
-        public bool ProductionSource { get; set; }
-        public bool DevSource { get; set; }
+        public bool CheckProductionSource { get; set; }
+        public bool CheckDevSource { get; set; }
         public string CLIOutputLine { get; set; }
 
         public async Task ExecuteNupkgCmd() {
+            try {
+                var proj = SelectedFile as Project;
+                if (proj == null) {
+                    MessageBox.Show($"File is not a .csproj or .vbproj", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var outputPath = (await PreferenceService.GetSetting(Settings.NugetDefaultOutputPath))?.ValueString;
+                var workingDir = Path.GetDirectoryName(proj.Path);
+                var cmd = "";
+                if (OptionPack) {
+                    cmd = Nuget.Init().Pack(proj.Path).OutputDirectory(outputPath).Properties().Configuration().Out;
+                }
+                if (OptionRestore) {
 
+                }
+                await _runNuget.RunAsync(cmd, workingDir);
+                await UpdateFilesData();
+            } catch (Exception ex) {
+                MessageBox.Show($"Execute Nupkg Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public async Task ExecutePackageCmd() {
+            try {
+                var nupkg = (SelectedFile as Nupkg)?.DetermineNugetInfo();
+                if (nupkg == null) {
+                    MessageBox.Show($"File is not a .nupkg", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var nugetSrv = await PreferenceService.GetSetting(Settings.NugetLocalNugetServer);
+                if (string.IsNullOrWhiteSpace(nugetSrv.ValueString) || !Directory.Exists(nugetSrv.ValueString)) {
+                    MessageBox.Show($"No local nuget server specified in settings", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
+                var cmd = "";
+                var workingDir = Path.GetDirectoryName(nupkg.Path);
+                if (OptionAddNupkg) {
+                    cmd = Nuget.Init().Add(nupkg.Path).Source(nugetSrv.ValueString).Out;
+                }
+                if (OptionDelete) {
+                    cmd = Nuget.Init().Delete(nupkg.PackageName).PackageVersion(nupkg.Version).Source(nugetSrv.ValueString).Out;
+                }
+                if (OptionList) {
+
+                }
+                await _runNuget.RunAsync(cmd, workingDir);
+                await UpdateFilesData();
+            } catch (Exception ex) {
+                MessageBox.Show($"Execute Package Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion

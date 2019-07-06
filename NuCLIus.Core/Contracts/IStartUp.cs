@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using NuCLIus.NugetCLI.Interfaces;
+using System.Threading.Tasks;
 
 namespace NuCLIus.Core.Contracts {
     public interface IStartup {
@@ -7,5 +8,6 @@ namespace NuCLIus.Core.Contracts {
         IStorageService GetStorageService();
         IPreferenceService GetPreferenceService();
         IFileService GetFileService();
+        IRunNuget GetRunNuget();
     }
 }
