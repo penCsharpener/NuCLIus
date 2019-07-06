@@ -7,5 +7,6 @@ namespace NuCLIus.Core.Contracts {
         ConcurrentDictionary<string, IFile> FoundFiles { get; }
         Task<List<IFile>> GetFiles();
         Task RefreshFromFileSystem();
+        Task WriteFileToStorage(IFile file);
     }
 }

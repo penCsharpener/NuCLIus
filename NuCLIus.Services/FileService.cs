@@ -59,5 +59,9 @@ namespace NuCLIus.Services {
                 await UpdateStorage();
             });
         }
+
+        public async Task WriteFileToStorage(IFile file) {
+            await _store.WriteNewFile(file);
+        }
     }
 }
