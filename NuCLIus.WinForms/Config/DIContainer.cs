@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using NuCLIus.Core.Contracts;
 using NuCLIus.Core.Entities;
+using NuCLIus.NugetCLI.Interfaces;
+using NuCLIus.NugetCLI.Run;
 using NuCLIus.Services;
-using NuCLIus.Services.Nuget;
 
 namespace NuCLIus.WinForms.Config {
     public static class DIContainer {
+
         public static IContainer Config() {
             var builder = new ContainerBuilder();
             builder.RegisterType<Startup>().As<IStartup>().SingleInstance();
@@ -15,8 +17,7 @@ namespace NuCLIus.WinForms.Config {
             builder.RegisterType<FileSearch>().As<IFileSearch>().SingleInstance();
             builder.RegisterType<FileStorage>().As<IFileStorage>().SingleInstance();
             builder.RegisterType<NugetCLIService>().As<INugetCLIService>().InstancePerDependency();
-            builder.RegisterType<NugetCLIService>().WithProperty("NugetAddOptions", new NugetAddOptions()).InstancePerDependency();
-            builder.RegisterType<NugetCLIService>().WithProperty("NugetPackProperties", new NugetPackProperties()).InstancePerDependency();
+            builder.RegisterType<NugetWinRun>().As<IRunNuget>().InstancePerDependency();
 
             return builder.Build();
         }

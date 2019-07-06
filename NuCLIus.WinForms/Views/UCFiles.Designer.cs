@@ -185,6 +185,7 @@
             // radRestore
             // 
             this.radRestore.AutoSize = true;
+            this.radRestore.Enabled = false;
             this.radRestore.Location = new System.Drawing.Point(6, 47);
             this.radRestore.Name = "radRestore";
             this.radRestore.Size = new System.Drawing.Size(61, 19);
@@ -267,6 +268,7 @@
             // radList
             // 
             this.radList.AutoSize = true;
+            this.radList.Enabled = false;
             this.radList.Location = new System.Drawing.Point(6, 72);
             this.radList.Name = "radList";
             this.radList.Size = new System.Drawing.Size(40, 19);
