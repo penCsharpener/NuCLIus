@@ -16,7 +16,6 @@ namespace NuCLIus.WinForms.Config {
             builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
             builder.RegisterType<FileSearch>().As<IFileSearch>().SingleInstance();
             builder.RegisterType<FileStorage>().As<IFileStorage>().SingleInstance();
-            builder.RegisterType<NugetCLIService>().As<INugetCLIService>().InstancePerDependency();
             builder.RegisterType<NugetWinRun>().As<IRunNuget>().InstancePerDependency();
 
             return builder.Build();
