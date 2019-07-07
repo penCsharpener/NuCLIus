@@ -53,9 +53,12 @@ namespace NuCLIus.WinForms.Views {
             btnExecuteNupkg.Click += async (s, e) => {
                 await vm.ExecuteNupkgCmd();
             };
-            btnExecutePackageSource.Click += async (s, e) => {
-                await vm.ExecutePackageCmd();
+            btnSaveSettings.Click += async (s, e) => {
+                await vm.SaveSettings();
             };
+            //btnExecutePackageSource.Click += async (s, e) => {
+            //    await vm.ExecutePackageCmd();
+            //};
             radPack.CheckedChanged += RadNupkgCheckedChanged;
             radRestore.CheckedChanged += RadNupkgCheckedChanged;
             radAddNupkg.CheckedChanged += RadPackagingCheckedChanged;
@@ -88,7 +91,12 @@ namespace NuCLIus.WinForms.Views {
             chkSourceDevelopment.DataBindings.Add(nameof(chkSourceDevelopment.Checked), vm, nameof(vm.CheckDevSource), true, DataSourceUpdateMode.OnPropertyChanged);
             groupBoxProjectCmds.DataBindings.Add(nameof(groupBoxProjectCmds.Visible), vm, nameof(vm.IsProject), true, DataSourceUpdateMode.OnPropertyChanged);
             groupBoxNupkgCmds.DataBindings.Add(nameof(groupBoxNupkgCmds.Visible), vm, nameof(vm.IsNupkg), true, DataSourceUpdateMode.OnPropertyChanged);
-            btnExecuteNupkg.DataBindings.Add(nameof(btnExecuteNupkg.Enabled), vm, nameof(vm.NugetCLIRelevant), true, DataSourceUpdateMode.OnPropertyChanged);
+            groupBoxSettings.DataBindings.Add(nameof(groupBoxSettings.Visible), vm, nameof(vm.SettingsVisible), true, DataSourceUpdateMode.OnPropertyChanged);
+            btnExecuteNupkg.DataBindings.Add(nameof(btnExecuteNupkg.Enabled), vm, nameof(vm.ExecuteButtonEnabled), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtNugetExePath.DataBindings.Add(nameof(txtNugetExePath.Text), vm, nameof(vm.NugetExePath), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtDefOutput.DataBindings.Add(nameof(txtDefOutput.Text), vm, nameof(vm.NugetDefaultOutput), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtLocalNugetServer.DataBindings.Add(nameof(txtLocalNugetServer.Text), vm, nameof(vm.NugetLocalServer), true, DataSourceUpdateMode.OnPropertyChanged);
+            txtDevNugetServer.DataBindings.Add(nameof(txtDevNugetServer.Text), vm, nameof(vm.NugetLocalDevServer), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

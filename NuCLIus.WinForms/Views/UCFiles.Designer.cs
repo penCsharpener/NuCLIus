@@ -66,6 +66,18 @@
             this.radList = new System.Windows.Forms.RadioButton();
             this.radDelete = new System.Windows.Forms.RadioButton();
             this.radAddNupkg = new System.Windows.Forms.RadioButton();
+            this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.txtNugetExePath = new System.Windows.Forms.TextBox();
+            this.txtDefOutput = new System.Windows.Forms.TextBox();
+            this.txtLocalNugetServer = new System.Windows.Forms.TextBox();
+            this.txtDevNugetServer = new System.Windows.Forms.TextBox();
+            this.btnSaveSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataRecentNupkg)).BeginInit();
@@ -83,6 +95,9 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataFrequentlyUsed)).BeginInit();
             this.groupBoxNupkgCmds.SuspendLayout();
+            this.groupBoxSettings.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -162,11 +177,10 @@
             // 
             this.tabPageNupkg.AutoScroll = true;
             this.tabPageNupkg.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageNupkg.Controls.Add(this.groupBoxSettings);
+            this.tabPageNupkg.Controls.Add(this.panel6);
             this.tabPageNupkg.Controls.Add(this.groupBoxNupkgCmds);
-            this.tabPageNupkg.Controls.Add(this.chkSourceDevelopment);
-            this.tabPageNupkg.Controls.Add(this.chkSourceProduction);
             this.tabPageNupkg.Controls.Add(this.groupBoxProjectCmds);
-            this.tabPageNupkg.Controls.Add(this.btnExecuteNupkg);
             this.tabPageNupkg.Location = new System.Drawing.Point(4, 31);
             this.tabPageNupkg.Name = "tabPageNupkg";
             this.tabPageNupkg.Padding = new System.Windows.Forms.Padding(3);
@@ -212,7 +226,7 @@
             // btnExecuteNupkg
             // 
             this.btnExecuteNupkg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExecuteNupkg.Location = new System.Drawing.Point(601, 234);
+            this.btnExecuteNupkg.Location = new System.Drawing.Point(87, 222);
             this.btnExecuteNupkg.Name = "btnExecuteNupkg";
             this.btnExecuteNupkg.Size = new System.Drawing.Size(75, 27);
             this.btnExecuteNupkg.TabIndex = 0;
@@ -501,7 +515,7 @@
             // 
             this.chkSourceDevelopment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSourceDevelopment.AutoSize = true;
-            this.chkSourceDevelopment.Location = new System.Drawing.Point(538, 206);
+            this.chkSourceDevelopment.Location = new System.Drawing.Point(24, 194);
             this.chkSourceDevelopment.Name = "chkSourceDevelopment";
             this.chkSourceDevelopment.Size = new System.Drawing.Size(136, 19);
             this.chkSourceDevelopment.TabIndex = 7;
@@ -512,7 +526,7 @@
             // 
             this.chkSourceProduction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSourceProduction.AutoSize = true;
-            this.chkSourceProduction.Location = new System.Drawing.Point(538, 181);
+            this.chkSourceProduction.Location = new System.Drawing.Point(24, 169);
             this.chkSourceProduction.Name = "chkSourceProduction";
             this.chkSourceProduction.Size = new System.Drawing.Size(124, 19);
             this.chkSourceProduction.TabIndex = 6;
@@ -566,6 +580,148 @@
             this.radAddNupkg.Text = "add";
             this.radAddNupkg.UseVisualStyleBackColor = true;
             // 
+            // groupBoxSettings
+            // 
+            this.groupBoxSettings.Controls.Add(this.tableLayoutPanel2);
+            this.groupBoxSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSettings.Location = new System.Drawing.Point(205, 3);
+            this.groupBoxSettings.Name = "groupBoxSettings";
+            this.groupBoxSettings.Size = new System.Drawing.Size(280, 261);
+            this.groupBoxSettings.TabIndex = 9;
+            this.groupBoxSettings.TabStop = false;
+            this.groupBoxSettings.Text = "nuget settings";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.txtDevNugetServer, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtLocalNugetServer, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtDefOutput, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtNugetExePath, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnSaveSettings, 0, 6);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 19);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(274, 239);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 27);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "nuget .exe";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 27);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "default output path:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(3, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(144, 27);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "local nuget server:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(3, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(144, 27);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "local dev nuget server:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.chkSourceProduction);
+            this.panel6.Controls.Add(this.btnExecuteNupkg);
+            this.panel6.Controls.Add(this.chkSourceDevelopment);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(485, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(194, 261);
+            this.panel6.TabIndex = 10;
+            // 
+            // txtNugetExePath
+            // 
+            this.txtNugetExePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtNugetExePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtNugetExePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNugetExePath.Location = new System.Drawing.Point(153, 3);
+            this.txtNugetExePath.Name = "txtNugetExePath";
+            this.txtNugetExePath.Size = new System.Drawing.Size(118, 23);
+            this.txtNugetExePath.TabIndex = 4;
+            // 
+            // txtDefOutput
+            // 
+            this.txtDefOutput.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtDefOutput.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtDefOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDefOutput.Location = new System.Drawing.Point(153, 30);
+            this.txtDefOutput.Name = "txtDefOutput";
+            this.txtDefOutput.Size = new System.Drawing.Size(118, 23);
+            this.txtDefOutput.TabIndex = 5;
+            // 
+            // txtLocalNugetServer
+            // 
+            this.txtLocalNugetServer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtLocalNugetServer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtLocalNugetServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLocalNugetServer.Location = new System.Drawing.Point(153, 57);
+            this.txtLocalNugetServer.Name = "txtLocalNugetServer";
+            this.txtLocalNugetServer.Size = new System.Drawing.Size(118, 23);
+            this.txtLocalNugetServer.TabIndex = 6;
+            // 
+            // txtDevNugetServer
+            // 
+            this.txtDevNugetServer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtDevNugetServer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtDevNugetServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDevNugetServer.Location = new System.Drawing.Point(153, 84);
+            this.txtDevNugetServer.Name = "txtDevNugetServer";
+            this.txtDevNugetServer.Size = new System.Drawing.Size(118, 23);
+            this.txtDevNugetServer.TabIndex = 7;
+            // 
+            // btnSaveSettings
+            // 
+            this.btnSaveSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSaveSettings.Location = new System.Drawing.Point(3, 165);
+            this.btnSaveSettings.Name = "btnSaveSettings";
+            this.btnSaveSettings.Size = new System.Drawing.Size(144, 21);
+            this.btnSaveSettings.TabIndex = 8;
+            this.btnSaveSettings.Text = "Save";
+            this.btnSaveSettings.UseVisualStyleBackColor = true;
+            // 
             // UCFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -580,7 +736,6 @@
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageNupkg.ResumeLayout(false);
-            this.tabPageNupkg.PerformLayout();
             this.groupBoxProjectCmds.ResumeLayout(false);
             this.groupBoxProjectCmds.PerformLayout();
             this.tabPagePackageSource.ResumeLayout(false);
@@ -598,6 +753,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataFrequentlyUsed)).EndInit();
             this.groupBoxNupkgCmds.ResumeLayout(false);
             this.groupBoxNupkgCmds.PerformLayout();
+            this.groupBoxSettings.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -647,5 +807,17 @@
         private System.Windows.Forms.RadioButton radList;
         private System.Windows.Forms.RadioButton radDelete;
         private System.Windows.Forms.RadioButton radAddNupkg;
+        private System.Windows.Forms.GroupBox groupBoxSettings;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox txtDevNugetServer;
+        private System.Windows.Forms.TextBox txtLocalNugetServer;
+        private System.Windows.Forms.TextBox txtDefOutput;
+        private System.Windows.Forms.TextBox txtNugetExePath;
+        private System.Windows.Forms.Button btnSaveSettings;
     }
 }

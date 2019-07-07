@@ -52,11 +52,13 @@ namespace NuCLIus.WinForms.Views {
             };
             BsFiles.CurrentChanged += async (s, e) => {
                 SelectedFile = BsFiles.Current as IFile;
+                ExecuteButtonEnabled = IsProject || IsNupkg;
                 await GenerateCLI();
             };
             _runNuget.GetCmdStandardOutput += async (s, e) => {
                 try {
-                    if (e.Contains("Successfully created package")) {
+                    ExecuteButtonEnabled = true;
+                    if (e.IndexOf("Successfully created package", StringComparison.OrdinalIgnoreCase) < 0) {
                         var pathLine = e.Split("'".ToArray(), StringSplitOptions.RemoveEmptyEntries).LastOrDefault(x => x.Contains(":\\") && x.Contains(".nupkg"));
                         if (pathLine != null && File.Exists(pathLine)) {
                             var createFileInfo = new FileInfo(pathLine);
@@ -86,6 +88,10 @@ namespace NuCLIus.WinForms.Views {
                     MessageBox.Show($"ViewModelFiles:\r\n{ex.Message}", "Error: copying to Dev Source", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             };
+            Load += async (s, e) => {
+                await LoadSettings();
+            };
+            OnLoad();
         }
 
         public IPreferenceService PreferenceService { get; }
@@ -97,7 +103,8 @@ namespace NuCLIus.WinForms.Views {
         public bool IsSolution => SelectedFile is Solution;
         public bool IsProject => SelectedFile is Project;
         public bool IsNupkg => SelectedFile is Nupkg;
-        public bool NugetCLIRelevant => IsProject || IsNupkg;
+        public bool ExecuteButtonEnabled { get; set; }
+        public bool SettingsVisible { get; set; }
 
         #region Files
 
@@ -159,18 +166,14 @@ namespace NuCLIus.WinForms.Views {
         public bool CheckProductionSource { get; set; }
         public bool CheckDevSource { get; set; }
         public string CLIOutputLine { get; set; }
-        private string WorkingDirectory;
+        private string workingDirectory;
 
         private async Task GenerateCLI() {
             if (IsProject) {
                 try {
                     var proj = SelectedFile as Project;
-                    if (proj == null) {
-                        MessageBox.Show($"File is not a .csproj or .vbproj", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
                     var outputPath = (await PreferenceService.GetSetting(Settings.NugetDefaultOutputPath))?.ValueString;
-                    WorkingDirectory = Path.GetDirectoryName(proj.Path);
+                    workingDirectory = Path.GetDirectoryName(proj.Path);
                     if (OptionPack) {
                         CLIOutputLine = Nuget.Init().Pack(proj.Path).OutputDirectory(outputPath).Properties().Configuration().Out;
                     }
@@ -184,17 +187,15 @@ namespace NuCLIus.WinForms.Views {
             if (IsNupkg) {
                 try {
                     var nupkg = (SelectedFile as Nupkg)?.DetermineNugetInfo();
-                    if (nupkg == null) {
-                        MessageBox.Show($"File is not a .nupkg", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+
                     var nugetSrv = await PreferenceService.GetSetting(Settings.NugetLocalNugetServer);
                     if (string.IsNullOrWhiteSpace(nugetSrv.ValueString) || !Directory.Exists(nugetSrv.ValueString)) {
+                        SettingsVisible = true;
                         MessageBox.Show($"No local nuget server specified in settings", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    WorkingDirectory = Path.GetDirectoryName(nupkg.Path);
+                    workingDirectory = Path.GetDirectoryName(nupkg.Path);
                     if (OptionAddNupkg) {
                         CLIOutputLine = Nuget.Init().Add(nupkg.Path).Source(nugetSrv.ValueString).Out;
                     }
@@ -212,7 +213,9 @@ namespace NuCLIus.WinForms.Views {
 
         public async Task ExecuteNupkgCmd() {
             try {
-                await _runNuget.RunAsync(CLIOutputLine, WorkingDirectory);
+                SettingsVisible = false;
+                ExecuteButtonEnabled = false;
+                await _runNuget.RunAsync(CLIOutputLine, workingDirectory);
                 await UpdateFilesData();
             } catch (Exception ex) {
                 if (IsProject) {
@@ -221,12 +224,8 @@ namespace NuCLIus.WinForms.Views {
                 if (IsNupkg) {
                     MessageBox.Show($"Execute Package Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                ExecuteButtonEnabled = true;
             }
-
-        }
-
-        public async Task ExecutePackageCmd() {
-            
         }
 
         #endregion
@@ -234,5 +233,35 @@ namespace NuCLIus.WinForms.Views {
         #region Log
 
         #endregion
+
+        #region Settings
+
+        public string NugetExePath { get; set; }
+        public string NugetDefaultOutput { get; set; }
+        public string NugetLocalServer { get; set; }
+        public string NugetLocalDevServer { get; set; }
+
+        private async Task LoadSettings() {
+            var listSettings = await PreferenceService.GetSettings();
+            NugetExePath = listSettings.GetStringSetting(Settings.NugetExePath);
+            NugetDefaultOutput = listSettings.GetStringSetting(Settings.NugetDefaultOutputPath);
+            NugetLocalServer = listSettings.GetStringSetting(Settings.NugetLocalNugetServer);
+            NugetLocalDevServer = listSettings.GetStringSetting(Settings.NugetLocalDevNugetServer);
+        }
+
+        public async Task SaveSettings() {
+            await PreferenceService.SaveSetting(Settings.NugetExePath, NugetExePath);
+            await PreferenceService.SaveSetting(Settings.NugetDefaultOutputPath, NugetDefaultOutput);
+            await PreferenceService.SaveSetting(Settings.NugetLocalNugetServer, NugetLocalServer);
+            await PreferenceService.SaveSetting(Settings.NugetLocalDevNugetServer, NugetLocalDevServer);
+            SettingsVisible = false;
+        }
+
+        #endregion
+
+        public event EventHandler Load;
+        protected virtual void OnLoad() {
+            Load?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
