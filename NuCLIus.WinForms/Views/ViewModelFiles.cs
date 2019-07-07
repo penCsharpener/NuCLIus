@@ -199,7 +199,7 @@ namespace NuCLIus.WinForms.Views {
                         CLIOutputLine = Nuget.Init().Add(nupkg.Path).Source(nugetSrv.ValueString).Out;
                     }
                     if (OptionDelete) {
-                        CLIOutputLine = Nuget.Init().Delete(nupkg.PackageName).PackageVersion(nupkg.Version).Source(nugetSrv.ValueString).Out;
+                        CLIOutputLine = Nuget.Init().Delete(nupkg.PackageName).PackageVersion(nupkg.Version).NonInteractive().Source(nugetSrv.ValueString).Out;
                     }
                     if (OptionList) {
 

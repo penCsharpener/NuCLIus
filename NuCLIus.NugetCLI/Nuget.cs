@@ -41,8 +41,17 @@ namespace NuCLIus.NugetCLI {
             return this;
         }
 
-        public INugetAddOptions NonInteractive() {
+        #endregion
+
+        #region And and Delete
+
+        public INugetOptionSource NonInteractive() {
             sb.Append("-NonInteractive ");
+            return this;
+        }
+
+        public INugetOptionSource Source(string pathOrURL) {
+            sb.Append("-Source ").Append(pathOrURL.EnQuote()).Space();
             return this;
         }
 
@@ -57,11 +66,6 @@ namespace NuCLIus.NugetCLI {
 
         public INugetDeleteOptions PackageVersion(string version) {
             sb.Append(version).Space();
-            return this;
-        }
-
-        public INugetOptionSource Source(string pathOrURL) {
-            sb.Append("-Source ").Append(pathOrURL.EnQuote()).Space();
             return this;
         }
 
