@@ -29,17 +29,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageNupkg = new System.Windows.Forms.TabPage();
-            this.groupBoxCreateCommand = new System.Windows.Forms.GroupBox();
+            this.groupBoxProjectCmds = new System.Windows.Forms.GroupBox();
             this.radRestore = new System.Windows.Forms.RadioButton();
             this.radPack = new System.Windows.Forms.RadioButton();
             this.btnExecuteNupkg = new System.Windows.Forms.Button();
             this.tabPagePackageSource = new System.Windows.Forms.TabPage();
-            this.chkSourceDevelopment = new System.Windows.Forms.CheckBox();
-            this.chkSourceProduction = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radList = new System.Windows.Forms.RadioButton();
-            this.radDelete = new System.Windows.Forms.RadioButton();
-            this.radAddNupkg = new System.Windows.Forms.RadioButton();
             this.btnExecutePackageSource = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtCLIOutput = new System.Windows.Forms.TextBox();
@@ -65,15 +60,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataFrequentlyUsed = new System.Windows.Forms.DataGridView();
+            this.chkSourceDevelopment = new System.Windows.Forms.CheckBox();
+            this.chkSourceProduction = new System.Windows.Forms.CheckBox();
+            this.groupBoxNupkgCmds = new System.Windows.Forms.GroupBox();
+            this.radList = new System.Windows.Forms.RadioButton();
+            this.radDelete = new System.Windows.Forms.RadioButton();
+            this.radAddNupkg = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataRecentNupkg)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageNupkg.SuspendLayout();
-            this.groupBoxCreateCommand.SuspendLayout();
+            this.groupBoxProjectCmds.SuspendLayout();
             this.tabPagePackageSource.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -82,6 +82,7 @@
             this.panelDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataFrequentlyUsed)).BeginInit();
+            this.groupBoxNupkgCmds.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -161,26 +162,29 @@
             // 
             this.tabPageNupkg.AutoScroll = true;
             this.tabPageNupkg.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageNupkg.Controls.Add(this.groupBoxCreateCommand);
+            this.tabPageNupkg.Controls.Add(this.groupBoxNupkgCmds);
+            this.tabPageNupkg.Controls.Add(this.chkSourceDevelopment);
+            this.tabPageNupkg.Controls.Add(this.chkSourceProduction);
+            this.tabPageNupkg.Controls.Add(this.groupBoxProjectCmds);
             this.tabPageNupkg.Controls.Add(this.btnExecuteNupkg);
             this.tabPageNupkg.Location = new System.Drawing.Point(4, 31);
             this.tabPageNupkg.Name = "tabPageNupkg";
             this.tabPageNupkg.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageNupkg.Size = new System.Drawing.Size(682, 267);
             this.tabPageNupkg.TabIndex = 0;
-            this.tabPageNupkg.Text = ".nupkg";
+            this.tabPageNupkg.Text = "Nuget CLI";
             // 
-            // groupBoxCreateCommand
+            // groupBoxProjectCmds
             // 
-            this.groupBoxCreateCommand.Controls.Add(this.radRestore);
-            this.groupBoxCreateCommand.Controls.Add(this.radPack);
-            this.groupBoxCreateCommand.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBoxCreateCommand.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxCreateCommand.Name = "groupBoxCreateCommand";
-            this.groupBoxCreateCommand.Size = new System.Drawing.Size(120, 261);
-            this.groupBoxCreateCommand.TabIndex = 2;
-            this.groupBoxCreateCommand.TabStop = false;
-            this.groupBoxCreateCommand.Text = "Command";
+            this.groupBoxProjectCmds.Controls.Add(this.radRestore);
+            this.groupBoxProjectCmds.Controls.Add(this.radPack);
+            this.groupBoxProjectCmds.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxProjectCmds.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxProjectCmds.Name = "groupBoxProjectCmds";
+            this.groupBoxProjectCmds.Size = new System.Drawing.Size(96, 261);
+            this.groupBoxProjectCmds.TabIndex = 2;
+            this.groupBoxProjectCmds.TabStop = false;
+            this.groupBoxProjectCmds.Text = "with Project";
             // 
             // radRestore
             // 
@@ -219,8 +223,6 @@
             // 
             this.tabPagePackageSource.AutoScroll = true;
             this.tabPagePackageSource.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPagePackageSource.Controls.Add(this.chkSourceDevelopment);
-            this.tabPagePackageSource.Controls.Add(this.chkSourceProduction);
             this.tabPagePackageSource.Controls.Add(this.groupBox1);
             this.tabPagePackageSource.Controls.Add(this.btnExecutePackageSource);
             this.tabPagePackageSource.Location = new System.Drawing.Point(4, 31);
@@ -230,33 +232,8 @@
             this.tabPagePackageSource.TabIndex = 1;
             this.tabPagePackageSource.Text = "package source";
             // 
-            // chkSourceDevelopment
-            // 
-            this.chkSourceDevelopment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSourceDevelopment.AutoSize = true;
-            this.chkSourceDevelopment.Location = new System.Drawing.Point(535, 204);
-            this.chkSourceDevelopment.Name = "chkSourceDevelopment";
-            this.chkSourceDevelopment.Size = new System.Drawing.Size(136, 19);
-            this.chkSourceDevelopment.TabIndex = 5;
-            this.chkSourceDevelopment.Text = "Development Source";
-            this.chkSourceDevelopment.UseVisualStyleBackColor = true;
-            // 
-            // chkSourceProduction
-            // 
-            this.chkSourceProduction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSourceProduction.AutoSize = true;
-            this.chkSourceProduction.Location = new System.Drawing.Point(535, 179);
-            this.chkSourceProduction.Name = "chkSourceProduction";
-            this.chkSourceProduction.Size = new System.Drawing.Size(124, 19);
-            this.chkSourceProduction.TabIndex = 4;
-            this.chkSourceProduction.Text = "Production Source";
-            this.chkSourceProduction.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radList);
-            this.groupBox1.Controls.Add(this.radDelete);
-            this.groupBox1.Controls.Add(this.radAddNupkg);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -264,40 +241,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Command";
-            // 
-            // radList
-            // 
-            this.radList.AutoSize = true;
-            this.radList.Enabled = false;
-            this.radList.Location = new System.Drawing.Point(6, 72);
-            this.radList.Name = "radList";
-            this.radList.Size = new System.Drawing.Size(40, 19);
-            this.radList.TabIndex = 1;
-            this.radList.TabStop = true;
-            this.radList.Text = "list";
-            this.radList.UseVisualStyleBackColor = true;
-            // 
-            // radDelete
-            // 
-            this.radDelete.AutoSize = true;
-            this.radDelete.Location = new System.Drawing.Point(6, 47);
-            this.radDelete.Name = "radDelete";
-            this.radDelete.Size = new System.Drawing.Size(57, 19);
-            this.radDelete.TabIndex = 1;
-            this.radDelete.TabStop = true;
-            this.radDelete.Text = "delete";
-            this.radDelete.UseVisualStyleBackColor = true;
-            // 
-            // radAddNupkg
-            // 
-            this.radAddNupkg.AutoSize = true;
-            this.radAddNupkg.Location = new System.Drawing.Point(6, 22);
-            this.radAddNupkg.Name = "radAddNupkg";
-            this.radAddNupkg.Size = new System.Drawing.Size(45, 19);
-            this.radAddNupkg.TabIndex = 1;
-            this.radAddNupkg.TabStop = true;
-            this.radAddNupkg.Text = "add";
-            this.radAddNupkg.UseVisualStyleBackColor = true;
             // 
             // btnExecutePackageSource
             // 
@@ -555,6 +498,75 @@
             this.dataFrequentlyUsed.Size = new System.Drawing.Size(690, 151);
             this.dataFrequentlyUsed.TabIndex = 0;
             // 
+            // chkSourceDevelopment
+            // 
+            this.chkSourceDevelopment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSourceDevelopment.AutoSize = true;
+            this.chkSourceDevelopment.Location = new System.Drawing.Point(538, 206);
+            this.chkSourceDevelopment.Name = "chkSourceDevelopment";
+            this.chkSourceDevelopment.Size = new System.Drawing.Size(136, 19);
+            this.chkSourceDevelopment.TabIndex = 7;
+            this.chkSourceDevelopment.Text = "Development Source";
+            this.chkSourceDevelopment.UseVisualStyleBackColor = true;
+            // 
+            // chkSourceProduction
+            // 
+            this.chkSourceProduction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSourceProduction.AutoSize = true;
+            this.chkSourceProduction.Location = new System.Drawing.Point(538, 181);
+            this.chkSourceProduction.Name = "chkSourceProduction";
+            this.chkSourceProduction.Size = new System.Drawing.Size(124, 19);
+            this.chkSourceProduction.TabIndex = 6;
+            this.chkSourceProduction.Text = "Production Source";
+            this.chkSourceProduction.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxNupkgCmds
+            // 
+            this.groupBoxNupkgCmds.Controls.Add(this.radList);
+            this.groupBoxNupkgCmds.Controls.Add(this.radDelete);
+            this.groupBoxNupkgCmds.Controls.Add(this.radAddNupkg);
+            this.groupBoxNupkgCmds.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxNupkgCmds.Location = new System.Drawing.Point(99, 3);
+            this.groupBoxNupkgCmds.Name = "groupBoxNupkgCmds";
+            this.groupBoxNupkgCmds.Size = new System.Drawing.Size(106, 261);
+            this.groupBoxNupkgCmds.TabIndex = 8;
+            this.groupBoxNupkgCmds.TabStop = false;
+            this.groupBoxNupkgCmds.Text = "with Package";
+            // 
+            // radList
+            // 
+            this.radList.AutoSize = true;
+            this.radList.Enabled = false;
+            this.radList.Location = new System.Drawing.Point(6, 72);
+            this.radList.Name = "radList";
+            this.radList.Size = new System.Drawing.Size(40, 19);
+            this.radList.TabIndex = 5;
+            this.radList.TabStop = true;
+            this.radList.Text = "list";
+            this.radList.UseVisualStyleBackColor = true;
+            // 
+            // radDelete
+            // 
+            this.radDelete.AutoSize = true;
+            this.radDelete.Location = new System.Drawing.Point(6, 47);
+            this.radDelete.Name = "radDelete";
+            this.radDelete.Size = new System.Drawing.Size(57, 19);
+            this.radDelete.TabIndex = 6;
+            this.radDelete.TabStop = true;
+            this.radDelete.Text = "delete";
+            this.radDelete.UseVisualStyleBackColor = true;
+            // 
+            // radAddNupkg
+            // 
+            this.radAddNupkg.AutoSize = true;
+            this.radAddNupkg.Location = new System.Drawing.Point(6, 22);
+            this.radAddNupkg.Name = "radAddNupkg";
+            this.radAddNupkg.Size = new System.Drawing.Size(45, 19);
+            this.radAddNupkg.TabIndex = 7;
+            this.radAddNupkg.TabStop = true;
+            this.radAddNupkg.Text = "add";
+            this.radAddNupkg.UseVisualStyleBackColor = true;
+            // 
             // UCFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -569,12 +581,10 @@
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageNupkg.ResumeLayout(false);
-            this.groupBoxCreateCommand.ResumeLayout(false);
-            this.groupBoxCreateCommand.PerformLayout();
+            this.tabPageNupkg.PerformLayout();
+            this.groupBoxProjectCmds.ResumeLayout(false);
+            this.groupBoxProjectCmds.PerformLayout();
             this.tabPagePackageSource.ResumeLayout(false);
-            this.tabPagePackageSource.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panelFilter.ResumeLayout(false);
@@ -587,6 +597,8 @@
             this.panelDetails.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataFrequentlyUsed)).EndInit();
+            this.groupBoxNupkgCmds.ResumeLayout(false);
+            this.groupBoxNupkgCmds.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -625,15 +637,16 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnExecuteNupkg;
         private System.Windows.Forms.Button btnExecutePackageSource;
-        private System.Windows.Forms.GroupBox groupBoxCreateCommand;
+        private System.Windows.Forms.GroupBox groupBoxProjectCmds;
         private System.Windows.Forms.RadioButton radPack;
         private System.Windows.Forms.RadioButton radRestore;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radDelete;
-        private System.Windows.Forms.RadioButton radAddNupkg;
-        private System.Windows.Forms.RadioButton radList;
+        private System.Windows.Forms.LinkLabel lnkFsRefresh;
         private System.Windows.Forms.CheckBox chkSourceDevelopment;
         private System.Windows.Forms.CheckBox chkSourceProduction;
-        private System.Windows.Forms.LinkLabel lnkFsRefresh;
+        private System.Windows.Forms.GroupBox groupBoxNupkgCmds;
+        private System.Windows.Forms.RadioButton radList;
+        private System.Windows.Forms.RadioButton radDelete;
+        private System.Windows.Forms.RadioButton radAddNupkg;
     }
 }

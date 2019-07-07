@@ -36,7 +36,7 @@ namespace NuCLIus.WinForms.Views {
                     case nameof(CheckSln):
                     case nameof(CheckNuspec):
                     case nameof(CheckSnupkg):
-                    await UpdateFilesData();
+                        await UpdateFilesData();
                         break;
                     case nameof(OptionPack):
                     case nameof(OptionRestore):
@@ -47,6 +47,9 @@ namespace NuCLIus.WinForms.Views {
                         CheckProductionSource = true;
                         break;
                 }
+            };
+            BsFiles.CurrentChanged += (s, e) => {
+                SelectedFile = BsFiles.Current as IFile;
             };
             _runNuget.GetCmdStandardOutput += async (s, e) => {
                 try {
@@ -85,7 +88,7 @@ namespace NuCLIus.WinForms.Views {
         public BindingSource BsFiles { get; set; } = new BindingSource();
         public BindingSource BsMostFrequent { get; set; } = new BindingSource();
         public BindingSource BsNupkgLog { get; set; } = new BindingSource();
-        public IFile SelectedFile => BsFiles.Current as IFile;
+        public IFile SelectedFile { get; set; }
         public bool IsSolution => SelectedFile is Solution;
         public bool IsProject => SelectedFile is Project;
         public bool IsNupkg => SelectedFile is Nupkg;

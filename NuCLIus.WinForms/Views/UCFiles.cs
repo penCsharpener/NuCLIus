@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MYaSyncQL.Client.Forms.Controls.Wrappers;
+using NuCLIus.Core.Contracts;
+using NuCLIus.Core.Entities;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Autofac;
-using NuCLIus.Core.Contracts;
-using MYaSyncQL.Client.Forms.Controls.Wrappers;
-using NuCLIus.Core.Entities;
 
 namespace NuCLIus.WinForms.Views {
     public partial class UCFiles : UserControl {
@@ -27,6 +21,7 @@ namespace NuCLIus.WinForms.Views {
         }
 
         private async void UCFilesLoad(object sender, EventArgs e) {
+            tabControl1.Controls.Remove(tabPagePackageSource);
             await InitControls();
             await vm.UpdateFilesData();
         }
@@ -91,6 +86,8 @@ namespace NuCLIus.WinForms.Views {
             chkSnupkg.DataBindings.Add(nameof(chkSnupkg.Checked), vm, nameof(vm.CheckSnupkg), true, DataSourceUpdateMode.OnPropertyChanged);
             chkSourceProduction.DataBindings.Add(nameof(chkSourceProduction.Checked), vm, nameof(vm.CheckProductionSource), true, DataSourceUpdateMode.OnPropertyChanged);
             chkSourceDevelopment.DataBindings.Add(nameof(chkSourceDevelopment.Checked), vm, nameof(vm.CheckDevSource), true, DataSourceUpdateMode.OnPropertyChanged);
+            groupBoxProjectCmds.DataBindings.Add(nameof(groupBoxProjectCmds.Visible), vm, nameof(vm.IsProject), true, DataSourceUpdateMode.OnPropertyChanged);
+            groupBoxNupkgCmds.DataBindings.Add(nameof(groupBoxNupkgCmds.Visible), vm, nameof(vm.IsNupkg), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }
