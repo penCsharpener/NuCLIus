@@ -170,6 +170,16 @@ namespace NuCLIus.WinForms.Preferences {
 
         #endregion
 
+        public static string GetFolderFromDialog() {
+            using (var fbd = new FolderBrowserDialog()) {
+                var result = fbd.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath)) {
+                    return fbd.SelectedPath;
+                }
+            }
+            return null;
+        }
+
         public event EventHandler Load;
         protected virtual void OnLoad() {
             Load?.Invoke(this, EventArgs.Empty);

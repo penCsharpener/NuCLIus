@@ -71,6 +71,18 @@ namespace NuCLIus.WinForms.Preferences {
             btnAddIgnorePath.Click += async (s, e) => {
                 await vm.AddIgnorePath();
             };
+            btnGetRootFolderPath.Click += (s, e) => {
+                txtRootProjectFolder.Text = ViewModelPreferences.GetFolderFromDialog();
+            };
+            btnGetIgnorePath.Click += (s, e) => {
+                txtScanIgnorePaths.Text = ViewModelPreferences.GetFolderFromDialog();
+            };
+            btnGetNugetPath.Click += (s, e) => {
+                txtNugetExePath.Text = ViewModelPreferences.GetFolderFromDialog();
+            };
+            btnGetDefaultOutputPath.Click += (s, e) => {
+                txtDefaultOutputPath.Text = ViewModelPreferences.GetFolderFromDialog();
+            };
             dataProjectFolders.CellMouseClick += async (s, e) => {
                 if (dataProjectFolders.Columns[e.ColumnIndex].Name == "RemovePath") {
                     if (dataProjectFolders.Rows[e.RowIndex].DataBoundItem is RootFolder proj) {

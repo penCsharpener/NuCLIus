@@ -25,10 +25,16 @@
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageApplication = new System.Windows.Forms.TabPage();
+            this.btnAddIgnorePath = new System.Windows.Forms.Button();
             this.btnAddRootFolder = new System.Windows.Forms.Button();
-            this.btnGetProjectPath = new System.Windows.Forms.Button();
+            this.btnGetIgnorePath = new System.Windows.Forms.Button();
+            this.btnGetRootFolderPath = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.txtScanIgnorePaths = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.dataIgnorePaths = new System.Windows.Forms.DataGridView();
             this.txtRootProjectFolder = new System.Windows.Forms.TextBox();
             this.dataProjectFolders = new System.Windows.Forms.DataGridView();
             this.tabPageStorage = new System.Windows.Forms.TabPage();
@@ -66,15 +72,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNugetExePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataIgnorePaths = new System.Windows.Forms.DataGridView();
-            this.txtScanIgnorePaths = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.btnGetIgnorePath = new System.Windows.Forms.Button();
-            this.btnAddIgnorePath = new System.Windows.Forms.Button();
             this.btnSaveSettings = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageApplication.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataProjectFolders)).BeginInit();
             this.tabPageStorage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -82,7 +83,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMySqlPort)).BeginInit();
             this.tabPageNuget.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -106,7 +106,7 @@
             this.tabPageApplication.Controls.Add(this.btnAddIgnorePath);
             this.tabPageApplication.Controls.Add(this.btnAddRootFolder);
             this.tabPageApplication.Controls.Add(this.btnGetIgnorePath);
-            this.tabPageApplication.Controls.Add(this.btnGetProjectPath);
+            this.tabPageApplication.Controls.Add(this.btnGetRootFolderPath);
             this.tabPageApplication.Controls.Add(this.label18);
             this.tabPageApplication.Controls.Add(this.label17);
             this.tabPageApplication.Controls.Add(this.label14);
@@ -123,6 +123,15 @@
             this.tabPageApplication.Text = "Application";
             this.tabPageApplication.UseVisualStyleBackColor = true;
             // 
+            // btnAddIgnorePath
+            // 
+            this.btnAddIgnorePath.Location = new System.Drawing.Point(556, 274);
+            this.btnAddIgnorePath.Name = "btnAddIgnorePath";
+            this.btnAddIgnorePath.Size = new System.Drawing.Size(45, 23);
+            this.btnAddIgnorePath.TabIndex = 4;
+            this.btnAddIgnorePath.Text = "Add";
+            this.btnAddIgnorePath.UseVisualStyleBackColor = true;
+            // 
             // btnAddRootFolder
             // 
             this.btnAddRootFolder.Location = new System.Drawing.Point(556, 56);
@@ -132,14 +141,42 @@
             this.btnAddRootFolder.Text = "Add";
             this.btnAddRootFolder.UseVisualStyleBackColor = true;
             // 
-            // btnGetProjectPath
+            // btnGetIgnorePath
             // 
-            this.btnGetProjectPath.Location = new System.Drawing.Point(522, 56);
-            this.btnGetProjectPath.Name = "btnGetProjectPath";
-            this.btnGetProjectPath.Size = new System.Drawing.Size(28, 23);
-            this.btnGetProjectPath.TabIndex = 4;
-            this.btnGetProjectPath.Text = "...";
-            this.btnGetProjectPath.UseVisualStyleBackColor = true;
+            this.btnGetIgnorePath.Location = new System.Drawing.Point(522, 274);
+            this.btnGetIgnorePath.Name = "btnGetIgnorePath";
+            this.btnGetIgnorePath.Size = new System.Drawing.Size(28, 23);
+            this.btnGetIgnorePath.TabIndex = 4;
+            this.btnGetIgnorePath.Text = "...";
+            this.btnGetIgnorePath.UseVisualStyleBackColor = true;
+            // 
+            // btnGetRootFolderPath
+            // 
+            this.btnGetRootFolderPath.Location = new System.Drawing.Point(522, 56);
+            this.btnGetRootFolderPath.Name = "btnGetRootFolderPath";
+            this.btnGetRootFolderPath.Size = new System.Drawing.Size(28, 23);
+            this.btnGetRootFolderPath.TabIndex = 4;
+            this.btnGetRootFolderPath.Text = "...";
+            this.btnGetRootFolderPath.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 237);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(110, 21);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Ignore Paths:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(20, 277);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 15);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Folder path:";
             // 
             // label14
             // 
@@ -151,6 +188,13 @@
             this.label14.TabIndex = 3;
             this.label14.Text = "Project folders:";
             // 
+            // txtScanIgnorePaths
+            // 
+            this.txtScanIgnorePaths.Location = new System.Drawing.Point(96, 274);
+            this.txtScanIgnorePaths.Name = "txtScanIgnorePaths";
+            this.txtScanIgnorePaths.Size = new System.Drawing.Size(420, 23);
+            this.txtScanIgnorePaths.TabIndex = 1;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -159,6 +203,14 @@
             this.label13.Size = new System.Drawing.Size(70, 15);
             this.label13.TabIndex = 2;
             this.label13.Text = "Folder path:";
+            // 
+            // dataIgnorePaths
+            // 
+            this.dataIgnorePaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataIgnorePaths.Location = new System.Drawing.Point(23, 303);
+            this.dataIgnorePaths.Name = "dataIgnorePaths";
+            this.dataIgnorePaths.Size = new System.Drawing.Size(578, 141);
+            this.dataIgnorePaths.TabIndex = 0;
             // 
             // txtRootProjectFolder
             // 
@@ -527,58 +579,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "nuget.exe path:";
             // 
-            // dataIgnorePaths
-            // 
-            this.dataIgnorePaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataIgnorePaths.Location = new System.Drawing.Point(23, 303);
-            this.dataIgnorePaths.Name = "dataIgnorePaths";
-            this.dataIgnorePaths.Size = new System.Drawing.Size(578, 141);
-            this.dataIgnorePaths.TabIndex = 0;
-            // 
-            // txtScanIgnorePaths
-            // 
-            this.txtScanIgnorePaths.Location = new System.Drawing.Point(96, 274);
-            this.txtScanIgnorePaths.Name = "txtScanIgnorePaths";
-            this.txtScanIgnorePaths.Size = new System.Drawing.Size(420, 23);
-            this.txtScanIgnorePaths.TabIndex = 1;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(20, 277);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 15);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "Folder path:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(19, 237);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(110, 21);
-            this.label18.TabIndex = 3;
-            this.label18.Text = "Ignore Paths:";
-            // 
-            // btnGetIgnorePath
-            // 
-            this.btnGetIgnorePath.Location = new System.Drawing.Point(522, 274);
-            this.btnGetIgnorePath.Name = "btnGetIgnorePath";
-            this.btnGetIgnorePath.Size = new System.Drawing.Size(28, 23);
-            this.btnGetIgnorePath.TabIndex = 4;
-            this.btnGetIgnorePath.Text = "...";
-            this.btnGetIgnorePath.UseVisualStyleBackColor = true;
-            // 
-            // btnAddIgnorePath
-            // 
-            this.btnAddIgnorePath.Location = new System.Drawing.Point(556, 274);
-            this.btnAddIgnorePath.Name = "btnAddIgnorePath";
-            this.btnAddIgnorePath.Size = new System.Drawing.Size(45, 23);
-            this.btnAddIgnorePath.TabIndex = 4;
-            this.btnAddIgnorePath.Text = "Add";
-            this.btnAddIgnorePath.UseVisualStyleBackColor = true;
-            // 
             // btnSaveSettings
             // 
             this.btnSaveSettings.Location = new System.Drawing.Point(807, 8);
@@ -602,6 +602,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageApplication.ResumeLayout(false);
             this.tabPageApplication.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataProjectFolders)).EndInit();
             this.tabPageStorage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -612,7 +613,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMySqlPort)).EndInit();
             this.tabPageNuget.ResumeLayout(false);
             this.tabPageNuget.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataIgnorePaths)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -661,7 +661,7 @@
         private System.Windows.Forms.TextBox txtLocalDevNugetServer;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnAddRootFolder;
-        private System.Windows.Forms.Button btnGetProjectPath;
+        private System.Windows.Forms.Button btnGetRootFolderPath;
         private System.Windows.Forms.Button btnAddIgnorePath;
         private System.Windows.Forms.Button btnGetIgnorePath;
         private System.Windows.Forms.Label label18;
