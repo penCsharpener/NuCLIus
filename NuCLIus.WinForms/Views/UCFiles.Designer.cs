@@ -266,7 +266,6 @@
             this.txtCLIOutput.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtCLIOutput.Location = new System.Drawing.Point(0, 0);
             this.txtCLIOutput.Name = "txtCLIOutput";
-            this.txtCLIOutput.ReadOnly = true;
             this.txtCLIOutput.Size = new System.Drawing.Size(690, 23);
             this.txtCLIOutput.TabIndex = 0;
             // 

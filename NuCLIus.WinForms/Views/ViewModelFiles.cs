@@ -41,15 +41,18 @@ namespace NuCLIus.WinForms.Views {
                     case nameof(OptionPack):
                     case nameof(OptionRestore):
                     case nameof(OptionList):
+                        await GenerateCLI();
                         break;
                     case nameof(OptionDelete):
                     case nameof(OptionAddNupkg):
                         CheckProductionSource = true;
+                        await GenerateCLI();
                         break;
                 }
             };
-            BsFiles.CurrentChanged += (s, e) => {
+            BsFiles.CurrentChanged += async (s, e) => {
                 SelectedFile = BsFiles.Current as IFile;
+                await GenerateCLI();
             };
             _runNuget.GetCmdStandardOutput += async (s, e) => {
                 try {
@@ -76,6 +79,8 @@ namespace NuCLIus.WinForms.Views {
                                 MessageBox.Show($"Writing new nuget package to storage failed:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
+                    } else if (e.IndexOf("error", StringComparison.OrdinalIgnoreCase) < 0) {
+                        MessageBox.Show($"ViewModelFiles:\r\n\r\n{e}", "Nuget.exe Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } catch (Exception ex) {
                     MessageBox.Show($"ViewModelFiles:\r\n{ex.Message}", "Error: copying to Dev Source", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -92,6 +97,7 @@ namespace NuCLIus.WinForms.Views {
         public bool IsSolution => SelectedFile is Solution;
         public bool IsProject => SelectedFile is Project;
         public bool IsNupkg => SelectedFile is Nupkg;
+        public bool NugetCLIRelevant => IsProject || IsNupkg;
 
         #region Files
 
@@ -153,59 +159,74 @@ namespace NuCLIus.WinForms.Views {
         public bool CheckProductionSource { get; set; }
         public bool CheckDevSource { get; set; }
         public string CLIOutputLine { get; set; }
+        private string WorkingDirectory;
 
-        public async Task ExecuteNupkgCmd() {
-            try {
-                var proj = SelectedFile as Project;
-                if (proj == null) {
-                    MessageBox.Show($"File is not a .csproj or .vbproj", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                var outputPath = (await PreferenceService.GetSetting(Settings.NugetDefaultOutputPath))?.ValueString;
-                var workingDir = Path.GetDirectoryName(proj.Path);
-                var cmd = "";
-                if (OptionPack) {
-                    cmd = Nuget.Init().Pack(proj.Path).OutputDirectory(outputPath).Properties().Configuration().Out;
-                }
-                if (OptionRestore) {
+        private async Task GenerateCLI() {
+            if (IsProject) {
+                try {
+                    var proj = SelectedFile as Project;
+                    if (proj == null) {
+                        MessageBox.Show($"File is not a .csproj or .vbproj", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    var outputPath = (await PreferenceService.GetSetting(Settings.NugetDefaultOutputPath))?.ValueString;
+                    WorkingDirectory = Path.GetDirectoryName(proj.Path);
+                    if (OptionPack) {
+                        CLIOutputLine = Nuget.Init().Pack(proj.Path).OutputDirectory(outputPath).Properties().Configuration().Out;
+                    }
+                    if (OptionRestore) {
 
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show($"Execute Nupkg Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                await _runNuget.RunAsync(cmd, workingDir);
-                await UpdateFilesData();
-            } catch (Exception ex) {
-                MessageBox.Show($"Execute Nupkg Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (IsNupkg) {
+                try {
+                    var nupkg = (SelectedFile as Nupkg)?.DetermineNugetInfo();
+                    if (nupkg == null) {
+                        MessageBox.Show($"File is not a .nupkg", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    var nugetSrv = await PreferenceService.GetSetting(Settings.NugetLocalNugetServer);
+                    if (string.IsNullOrWhiteSpace(nugetSrv.ValueString) || !Directory.Exists(nugetSrv.ValueString)) {
+                        MessageBox.Show($"No local nuget server specified in settings", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    WorkingDirectory = Path.GetDirectoryName(nupkg.Path);
+                    if (OptionAddNupkg) {
+                        CLIOutputLine = Nuget.Init().Add(nupkg.Path).Source(nugetSrv.ValueString).Out;
+                    }
+                    if (OptionDelete) {
+                        CLIOutputLine = Nuget.Init().Delete(nupkg.PackageName).PackageVersion(nupkg.Version).Source(nugetSrv.ValueString).Out;
+                    }
+                    if (OptionList) {
+
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show($"Execute Package Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        public async Task ExecutePackageCmd() {
+        public async Task ExecuteNupkgCmd() {
             try {
-                var nupkg = (SelectedFile as Nupkg)?.DetermineNugetInfo();
-                if (nupkg == null) {
-                    MessageBox.Show($"File is not a .nupkg", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                var nugetSrv = await PreferenceService.GetSetting(Settings.NugetLocalNugetServer);
-                if (string.IsNullOrWhiteSpace(nugetSrv.ValueString) || !Directory.Exists(nugetSrv.ValueString)) {
-                    MessageBox.Show($"No local nuget server specified in settings", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                var cmd = "";
-                var workingDir = Path.GetDirectoryName(nupkg.Path);
-                if (OptionAddNupkg) {
-                    cmd = Nuget.Init().Add(nupkg.Path).Source(nugetSrv.ValueString).Out;
-                }
-                if (OptionDelete) {
-                    cmd = Nuget.Init().Delete(nupkg.PackageName).PackageVersion(nupkg.Version).Source(nugetSrv.ValueString).Out;
-                }
-                if (OptionList) {
-
-                }
-                await _runNuget.RunAsync(cmd, workingDir);
+                await _runNuget.RunAsync(CLIOutputLine, WorkingDirectory);
                 await UpdateFilesData();
             } catch (Exception ex) {
-                MessageBox.Show($"Execute Package Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (IsProject) {
+                    MessageBox.Show($"Execute Nupkg Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (IsNupkg) {
+                    MessageBox.Show($"Execute Package Cmd:\r\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
+        }
+
+        public async Task ExecutePackageCmd() {
+            
         }
 
         #endregion

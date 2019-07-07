@@ -88,6 +88,7 @@ namespace NuCLIus.WinForms.Views {
             chkSourceDevelopment.DataBindings.Add(nameof(chkSourceDevelopment.Checked), vm, nameof(vm.CheckDevSource), true, DataSourceUpdateMode.OnPropertyChanged);
             groupBoxProjectCmds.DataBindings.Add(nameof(groupBoxProjectCmds.Visible), vm, nameof(vm.IsProject), true, DataSourceUpdateMode.OnPropertyChanged);
             groupBoxNupkgCmds.DataBindings.Add(nameof(groupBoxNupkgCmds.Visible), vm, nameof(vm.IsNupkg), true, DataSourceUpdateMode.OnPropertyChanged);
+            btnExecuteNupkg.DataBindings.Add(nameof(btnExecuteNupkg.Enabled), vm, nameof(vm.NugetCLIRelevant), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }
