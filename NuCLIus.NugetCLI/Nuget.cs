@@ -61,7 +61,7 @@ namespace NuCLIus.NugetCLI {
         }
 
         public INugetOptionSource Source(string pathOrURL) {
-            sb.Append("-Source ").Append(pathOrURL).Space();
+            sb.Append("-Source ").Append(pathOrURL.EnQuote()).Space();
             return this;
         }
 
