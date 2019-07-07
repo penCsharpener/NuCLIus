@@ -74,7 +74,9 @@ namespace NuCLIus.Services {
         }
 
         public async Task WriteFileToStorage(IFile file) {
-            await _store.WriteNewFile(file);
+            if (!FoundFiles.Values.Any(x => x.PathSha1 == file.PathSha1)) {
+                await _store.WriteNewFile(file);
+            }
         }
     }
 }
