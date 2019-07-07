@@ -28,6 +28,10 @@ namespace NuCLIus.WinForms.Preferences {
                 if (e.PropertyName == nameof(FolderPath)) return;
                 else if (e.PropertyName == nameof(SqliteDBLocation)) return;
             };
+            Load += async (s, e) => {
+                await GetRootFolders();
+            };
+            OnLoad();
         }
 
         #region Application Tab
@@ -119,7 +123,7 @@ namespace NuCLIus.WinForms.Preferences {
 
         public async Task SavePreferences() {
             var propInfos = this.GetType().GetProperties();
-            var storedPrefs = await Storage.GetAll<Core.Entities.Preference>();
+            var storedPrefs = await Storage.GetAll<Preference>();
             var common = storedPrefs.Select(x => x.Name).Intersect(propInfos.Select(x => x.Name));
             foreach (var property in storedPrefs.Where(x => common.Contains(x.Name))) {
                 var propInfo = propInfos.FirstOrDefault(x => x.Name == property.Name);
@@ -165,5 +169,10 @@ namespace NuCLIus.WinForms.Preferences {
         public string NugetLocalDevNugetServer { get; set; }
 
         #endregion
+
+        public event EventHandler Load;
+        protected virtual void OnLoad() {
+            Load?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
