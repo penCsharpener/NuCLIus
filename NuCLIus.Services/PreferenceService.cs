@@ -36,5 +36,23 @@ namespace NuCLIus.Services {
             var items = await StorageService.Select<Preference>(q);
             return items.FirstOrDefault();
         }
+
+        public async Task SaveSetting(Settings setting, string value) {
+            var pref = await GetSetting(setting);
+            pref.ValueString = value;
+            await StorageService.UpdateEntity(pref);
+        }
+
+        public async Task SaveSetting(Settings setting, int value) {
+            var pref = await GetSetting(setting);
+            pref.ValueInt = value;
+            await StorageService.UpdateEntity(pref);
+        }
+
+        public async Task SaveSetting(Settings setting, bool value) {
+            var pref = await GetSetting(setting);
+            pref.ValueInt = Convert.ToInt32(value);
+            await StorageService.UpdateEntity(pref);
+        }
     }
 }

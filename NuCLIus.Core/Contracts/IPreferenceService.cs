@@ -11,5 +11,8 @@ namespace NuCLIus.Core.Contracts {
         Task SetupAppDataFolder();
         Task<IEnumerable<Preference>> GetSettings();
         Task<Preference> GetSetting(Settings setting);
+        Task SaveSetting(Settings setting, string value);
+        Task SaveSetting(Settings setting, int value);
+        Task SaveSetting(Settings setting, bool value);
     }
 }
