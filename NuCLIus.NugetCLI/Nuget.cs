@@ -6,26 +6,29 @@ using NuCLIus.NugetCLI.Interfaces;
 using NuCLIus.NugetCLI.Utils;
 
 namespace NuCLIus.NugetCLI {
-    public class Nuget : INuget,
-                         INugetAddOptions,
-                         INugetPackOptions,
-                         INugetPackProperties,
-                         INugetDeleteOptions {
-
-        private StringBuilder sb = new StringBuilder();
+    public sealed class Nuget : CLIBase,
+                                INuget,
+                                INugetAddOptions,
+                                INugetPackOptions,
+                                INugetPackProperties,
+                                INugetDeleteOptions {
 
         public static bool Validate { get; set; } = true;
 
+        /// <summary>
+        /// Assumes that your nuget.exe files is either in C:\Windows\System32 or 
+        /// that you included it in the environment variable PATH.
+        /// </summary>
+        /// <returns></returns>
         public static Nuget Init() => new Nuget();
         public static Nuget Init(string nugetExePath) => new Nuget(nugetExePath);
 
-        internal Nuget() {
-            sb.Append("nuget ");
-        }
+        internal Nuget() : base("nuget") { }
 
-        internal Nuget(string nugetExePath) {
-            nugetExePath.FileValidate();
-            sb.Append(nugetExePath.EnQuote()).Space();
+        internal Nuget(string nugetExePath) : base(nugetExePath) {
+            if (!File.Exists(nugetExePath)) {
+                throw new FileNotFoundException($"'{nugetExePath}' could not be found");
+            }
         }
 
         #region Add
