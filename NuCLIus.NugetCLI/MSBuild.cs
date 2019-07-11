@@ -14,7 +14,7 @@ namespace NuCLIus.NugetCLI {
         public static MSBuild Init(string baseCommand = "msbuild") => new MSBuild(baseCommand);
         internal MSBuild(string baseCommand) : base(baseCommand) {
             if (!File.Exists(baseCommand)) {
-                throw new FileNotFoundException($"'{baseCommand}' could not be found".);
+                throw new FileNotFoundException($"'{baseCommand}' could not be found");
             }
         }
 

@@ -118,10 +118,20 @@ namespace NuCLIus.WinForms.Views {
 
         public async Task UpdateFilesData(bool updateView = true) {
             IEnumerable<IFile> files = new List<IFile>();
-            await await Task.Factory.StartNew( async () => {
+            await await Task.Factory.StartNew(async () => {
                 files = await FileService.GetFiles();
                 if (!string.IsNullOrWhiteSpace(TextSearch)) {
-                    files = files.Where(x => x.Path.Like(TextSearch));
+                    List<IFile> orLists = new List<IFile>();
+                    var orParts = TextSearch.Split("|".ToArray(), StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var orPart in orParts) {
+                        var andParts = orPart.Split(" ".ToArray(), StringSplitOptions.RemoveEmptyEntries);
+                        IEnumerable<IFile> andList = files;
+                        foreach (var andPart in andParts) {
+                            andList = andList.Where(x => x.Path.Like(andPart));
+                        }
+                        orLists.AddRange(andList);
+                    }
+                    files = orLists.Distinct();
                 }
                 var selectedFiles = new List<IFile>();
                 if (CheckCsProj) {
